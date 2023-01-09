@@ -36,5 +36,8 @@ java, Kotlin, Python, Android
   <img src="https://img.shields.io/badge/-Instagram-dd2a7b?style=flat-square&logo=instagram&logoColor=white&link=https://www.instagram.com/mkdirejjcdejj/"/>
   </a>
   <a href="mailto:ejjang2030@gmail.com"><img src="https://img.shields.io/badge/-Gmail-d14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:ejjang2030@gmail.com"/></a>
+  <a href="">
+  <img src="https://img.shields.io/badge/Notion.svg?style=for-the-badge&logo=notion&logoColor=white"/>
+  </a>
 
 </div>
