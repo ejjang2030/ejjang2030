@@ -30,12 +30,12 @@ java, Kotlin, Python, Android
 
 <div align="center">
   <a href="https://www.linkedin.com/in/ejjang2030/">
-  <img src="https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/ejjang2030/"/>
+  <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white"/>
   </a>
 <a href="https://www.instagram.com/mkdirejjcdejj/">
-  <img src="https://img.shields.io/badge/-Instagram-dd2a7b?style=flat-square&logo=instagram&logoColor=white&link=https://www.instagram.com/mkdirejjcdejj/"/>
+  <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white"/>
   </a>
-  <a href="mailto:ejjang2030@gmail.com"><img src="https://img.shields.io/badge/-Gmail-d14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:ejjang2030@gmail.com"/></a>
+  <a href="mailto:ejjang2030@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
   <a href="https://www.notion.so/Hi-I-m-Eunjae-b51d673cd6fc47b4bbf7cba63b0f36d7">
   <img src="https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white"/>
   </a>
