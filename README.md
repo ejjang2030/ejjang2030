@@ -24,7 +24,6 @@ java, Kotlin, Python, Android
 [![사용해본 언어](https://github-readme-stats.vercel.app/api/top-langs/?username=ejjang2030)](https://github.com/anuraghazra/github-readme-stats)
 [![Eunjae's github stats](https://github-readme-stats.vercel.app/api?username=ejjang2030)](https://github.com/anuraghazra/github-readme-stats)
 
-<br><br>
 <div align=center>
 [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/ejjang2030/)](https://www.linkedin.com/in/ejjang2030/) 
 [![Instagram Badge](https://img.shields.io/badge/-Instagram-dd2a7b?style=flat-square&logo=instagram&logoColor=white&link=https://www.instagram.com/mkdirejjcdejj/)](https://www.instagram.com/mkdirejjcdejj/) 
