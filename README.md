@@ -21,5 +21,7 @@ java, Kotlin, Python, Android
 <!-- ## 취미(Hobbies) -->
 
 ## Github stats
+### 주로 사용한 언어
 [![사용해본 언어](https://github-readme-stats.vercel.app/api/top-langs/?username=ejjang2030)](https://github.com/anuraghazra/github-readme-stats)
+### Eunjae's github stats
 [![Eunjae's github stats](https://github-readme-stats.vercel.app/api?username=ejjang2030)](https://github.com/anuraghazra/github-readme-stats)
