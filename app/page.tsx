@@ -54,59 +54,34 @@ function Arrow() {
 
 function SystemVisual() {
   return (
-    <div className="relative h-full min-h-[620px] overflow-hidden bg-[#081322] text-slate-100 max-md:min-h-[430px]">
+    <div className="relative h-full min-h-[520px] overflow-hidden bg-[#081322] text-slate-100 max-md:min-h-[340px]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_26%,rgba(59,130,246,.32),transparent_28%),radial-gradient(circle_at_24%_82%,rgba(14,165,233,.2),transparent_32%)]" />
       <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(96,165,250,.22)_1px,transparent_1px),linear-gradient(90deg,rgba(96,165,250,.22)_1px,transparent_1px)] [background-size:48px_48px]" />
-      <div className="absolute left-[8%] top-[12%] w-[58%] rounded-xl border border-blue-300/20 bg-slate-950/60 p-5 shadow-2xl backdrop-blur-sm">
-        <div className="mb-6 flex gap-1.5">
-          <span className="size-2 rounded-full bg-red-400" />
-          <span className="size-2 rounded-full bg-amber-400" />
-          <span className="size-2 rounded-full bg-emerald-400" />
-        </div>
-        <div className="space-y-3 font-mono text-[10px] text-blue-200/75">
-          <p>
-            <span className="text-cyan-300">const</span> 개발자 = &#123;
-          </p>
-          <p className="pl-4">
-            집중분야:{" "}
-            <span className="text-white">&quot;AI 제품 개발&quot;</span>,
-          </p>
-          <p className="pl-4">
-            기술: [
-            <span className="text-white">
-              &quot;모델&quot;, &quot;API&quot;, &quot;웹&quot;
-            </span>
-            ],
-          </p>
-          <p className="pl-4">
-            상태: <span className="text-emerald-300">&quot;개발 중&quot;</span>
-          </p>
-          <p>&#125;</p>
-        </div>
+      <div className="absolute right-[9%] top-[12%] rounded-full border border-blue-300/25 bg-slate-950/45 px-4 py-2 backdrop-blur-sm">
+        <span className="mr-2 inline-block size-1.5 rounded-full bg-blue-400" />
+        <span className="font-mono text-[9px] tracking-[.16em] text-blue-200">
+          AI · API · WEB
+        </span>
       </div>
-      <div className="absolute bottom-[13%] right-[7%] w-[56%] rounded-xl border border-slate-600/70 bg-slate-950/85 p-5 shadow-2xl">
-        <p className="font-mono text-[9px] tracking-[.18em] text-blue-300">
-          실시간 시스템 현황
+      <div className="absolute inset-x-[9%] bottom-[11%]">
+        <p className="mb-4 font-mono text-[9px] tracking-[.2em] text-blue-300">
+          하나의 제품으로 연결합니다
         </p>
-        <div className="mt-5 grid grid-cols-3 gap-2">
-          {[
-            ["92.9", "mAP50"],
-            ["89.3", "F1"],
-            ["24/7", "가동"],
-          ].map(([value, label]) => (
-            <div key={label} className="rounded-md border border-slate-700 p-3">
-              <strong className="block text-lg text-white">{value}</strong>
-              <span className="text-[8px] text-slate-500">{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="absolute bottom-8 left-8">
-        <p className="text-[clamp(24px,3vw,42px)] font-black tracking-[-.04em]">
+        <p className="max-w-md text-[clamp(28px,3.4vw,46px)] font-black leading-[1.12] tracking-[-.045em]">
           AI는 제품이 될 때
           <br />
           비로소 가치를 만듭니다.
         </p>
+        <div className="mt-7 flex items-center gap-2" aria-hidden="true">
+          {["모델", "API", "서비스"].map((label, index) => (
+            <div className="flex items-center gap-2" key={label}>
+              {index > 0 && <span className="h-px w-5 bg-blue-300/35" />}
+              <span className="rounded border border-blue-300/20 bg-slate-950/35 px-3 py-1.5 text-[9px] text-blue-100/80">
+                {label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -160,13 +135,13 @@ export default function Home() {
         id="top"
         className={classNames(
           wrap,
-          "grid min-h-[620px] grid-cols-2 border-x border-line max-md:grid-cols-1",
+          "grid min-h-[520px] grid-cols-2 border-x border-line max-md:grid-cols-1",
         )}
       >
         <div
           className={classNames(
             pagePadding,
-            "flex flex-col justify-center border-r border-line py-20 max-md:min-h-[500px] max-md:border-r-0",
+            "flex flex-col justify-center border-r border-line py-16 max-md:min-h-[500px] max-md:border-r-0",
           )}
         >
           <div className="mb-12 grid size-16 place-items-center rounded-full border border-line bg-surface font-mono text-lg font-black text-accent">
@@ -175,13 +150,15 @@ export default function Home() {
           <p className="mb-4 text-[10px] font-bold tracking-[.2em] text-accent">
             풀스택 · AI 개발자
           </p>
-          <h1 className="max-w-xl text-[clamp(42px,5vw,72px)] font-black leading-[1.08] tracking-[-.055em]">
-            안녕하세요, 장은재입니다.
+          <h1 className="max-w-xl text-[clamp(42px,5vw,72px)] font-black leading-[1.10] tracking-[-.055em]">
+            안녕하세요, <br />
+            <span className="highlight-mark">Product Engineer</span>
             <br />
-            <span className="text-muted">AI 제품 개발자</span>
+            장은재입니다.
+            <br />
           </h1>
           <p className="mt-7 max-w-lg text-base leading-8 text-muted">
-            사용자의 문제를 이해하고 AI 모델, 안정적인 API, 직관적인
+            사용자의 문제를 이해하고 AI 모델, 안정적인 API, <br /> 직관적인
             인터페이스를 연결해 실제로 쓰이는 제품을 만듭니다.
           </p>
           <div className="mt-10 flex gap-3">
@@ -209,17 +186,14 @@ export default function Home() {
         <div className="marquee-track flex w-max whitespace-nowrap text-[clamp(52px,8vw,122px)] font-black leading-none tracking-[-.06em] text-transparent [-webkit-text-stroke:1px_var(--line)]">
           {[0, 1].map((group) => (
             <span className="pr-12" key={group}>
-              {[
-                "AI 제품 개발",
-                "풀스택",
-                "시스템 설계",
-                "사용자 경험",
-              ].map((label) => (
-                <span key={label}>
-                  <span className="marquee-item">{label}</span>
-                  <span className="marquee-separator"> · </span>
-                </span>
-              ))}
+              {["AI 제품 개발", "풀스택", "시스템 설계", "사용자 경험"].map(
+                (label) => (
+                  <span key={label}>
+                    <span className="marquee-item">{label}</span>
+                    <span className="marquee-separator"> · </span>
+                  </span>
+                ),
+              )}
             </span>
           ))}
         </div>
@@ -311,20 +285,55 @@ export default function Home() {
               >
                 <div className="h-[220px] overflow-hidden border-b border-line bg-[#081322]">
                   {"image" in project && project.image && (
-                    <Image src={project.image.src} width={project.image.width} height={project.image.height} alt={project.image.alt} className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]" sizes="(max-width:768px) 100vw, 380px" />
+                    <Image
+                      src={project.image.src}
+                      width={project.image.width}
+                      height={project.image.height}
+                      alt={project.image.alt}
+                      className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                      sizes="(max-width:768px) 100vw, 380px"
+                    />
                   )}
-                  {!("image" in project) && <div className="relative grid h-full place-items-center overflow-hidden bg-[radial-gradient(circle_at_70%_30%,rgba(59,130,246,.3),transparent_35%)]"><div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(96,165,250,.3)_1px,transparent_1px),linear-gradient(90deg,rgba(96,165,250,.3)_1px,transparent_1px)] [background-size:32px_32px]" /><div className="relative rounded-lg border border-blue-300/20 bg-slate-950/70 px-8 py-6 font-mono text-xs text-blue-200">{project.index} / SYSTEM READY</div></div>}
+                  {!("image" in project) && (
+                    <div className="relative grid h-full place-items-center overflow-hidden bg-[radial-gradient(circle_at_70%_30%,rgba(59,130,246,.3),transparent_35%)]">
+                      <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(96,165,250,.3)_1px,transparent_1px),linear-gradient(90deg,rgba(96,165,250,.3)_1px,transparent_1px)] [background-size:32px_32px]" />
+                      <div className="relative rounded-lg border border-blue-300/20 bg-slate-950/70 px-8 py-6 font-mono text-xs text-blue-200">
+                        {project.index} / SYSTEM READY
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-1 flex-col p-7">
-                  <div className="flex items-center justify-between"><span className="font-mono text-sm font-bold text-accent">{project.index}</span><p className="text-[10px] font-bold tracking-[.14em] text-muted">{project.category}</p></div>
-                  <h3 className="mt-6 text-[clamp(25px,2.5vw,36px)] font-black leading-tight tracking-[-.04em]">{project.title}</h3>
-                  <p className="mt-5 text-sm leading-7 text-muted">{project.description}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-sm font-bold text-accent">
+                      {project.index}
+                    </span>
+                    <p className="text-[10px] font-bold tracking-[.14em] text-muted">
+                      {project.category}
+                    </p>
+                  </div>
+                  <h3 className="mt-6 text-[clamp(25px,2.5vw,36px)] font-black leading-tight tracking-[-.04em]">
+                    {project.title}
+                  </h3>
+                  <p className="mt-5 text-sm leading-7 text-muted">
+                    {project.description}
+                  </p>
                   <div className="mt-6 flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="rounded-full border border-line px-3 py-1.5 text-[10px] text-muted">{tag}</span>
+                      <span
+                        key={tag}
+                        className="rounded-full border border-line px-3 py-1.5 text-[10px] text-muted"
+                      >
+                        {tag}
+                      </span>
                     ))}
                   </div>
-                  <div className="mt-auto flex items-center justify-between border-t border-line pt-6 text-sm font-bold"><span>프로젝트 상세 보기</span><span className="text-xl text-accent transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"><Arrow /></span></div>
+                  <div className="mt-auto flex items-center justify-between border-t border-line pt-6 text-sm font-bold">
+                    <span>프로젝트 상세 보기</span>
+                    <span className="text-xl text-accent transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
+                      <Arrow />
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
