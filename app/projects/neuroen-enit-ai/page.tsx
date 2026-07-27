@@ -225,6 +225,35 @@ function ServiceGallery() {
   );
 }
 
+function ProjectBackground() {
+  return (
+    <div>
+      <div className="grid grid-cols-1 gap-10">
+        <div><p className={label}>프로젝트를 시작한 이유</p><h2 className="mt-5 text-[clamp(38px,5vw,68px)] font-black leading-[1.04] tracking-[-.05em]">왜 이 프로젝트가<br />필요했을까요?</h2></div>
+        <div className="space-y-5 text-base leading-8 text-muted"><p>이지브레인은 증상명만으로 접근하기보다 개인마다 다른 뇌의 데이터와 신경생리학적 검사 정보를 바탕으로 치료 전략을 세우는 eNIT 철학을 갖고 있었습니다.</p><p>체인 병원이 늘어나면서 각 지점의 의료진이 qEEG 자료를 더 편리하게 입력하고, 같은 흐름으로 전처리와 분석 결과를 확인할 수 있는 도구가 필요했습니다. 뉴로엔과 이지브레인은 이 진료 경험과 개발 역량을 결합해 ENIT-AI 프로젝트를 시작했습니다.</p><p>목표는 의사의 판단을 AI로 대체하는 것이 아니었습니다. 반복적인 데이터 처리와 결과 정리를 시스템이 돕고, 의료진이 환자별 정보를 검토해 진료 판단에 활용할 수 있는 일관된 업무 흐름을 만드는 것이었습니다.</p></div>
+      </div>
+
+      <div className="mt-14 grid grid-cols-2 gap-5 max-md:grid-cols-1">
+        <article className={classNames(card, "p-8")}><span className="font-mono text-sm font-bold text-accent">QEEG</span><h3 className="mt-4 text-2xl font-black">qEEG란 무엇인가</h3><p className="mt-5 text-sm leading-7 text-muted">qEEG(정량 뇌전도)는 두피에서 기록한 EEG 신호를 컴퓨터로 처리해 주파수별 세기, 연결성 등의 수치나 뇌 지도 형태로 표현하는 분석 방법입니다. 많은 신호를 빠르게 살펴보고 특정 패턴을 검토하는 데 도움을 줍니다.</p><div className="mt-6 rounded-lg border border-line bg-background p-5"><strong className="text-sm">해석할 때 중요하게 본 점</strong><p className="mt-2 text-sm leading-7 text-muted">qEEG 결과는 측정 상태, 약물, 잡음과 전처리 방식의 영향을 받을 수 있습니다. 그래서 ENIT-AI에서도 품질 검사 단계를 두고, 결과를 의료진이 원본 자료와 환자 정보를 함께 보며 해석하는 보조 정보로 설계했습니다.</p></div></article>
+        <article className={classNames(card, "p-8")}><span className="font-mono text-sm font-bold text-accent">eNIT</span><h3 className="mt-4 text-2xl font-black">eNIT가 지향하는 진료</h3><p className="mt-5 text-sm leading-7 text-muted">eNIT는 Evidence-based Neurotransmitter-specific Integrated Treatment의 약자로, 이 프로젝트에서는 증상과 진단명만이 아니라 개인의 뇌 데이터와 신경생리학적 검사 정보를 함께 살펴 맞춤 치료 전략을 세우는 이지브레인의 접근 방식을 의미합니다.</p><div className="mt-6 rounded-lg border border-line bg-background p-5"><strong className="text-sm">서비스로 옮겨야 했던 이유</strong><p className="mt-2 text-sm leading-7 text-muted">원장님의 경험과 분석 방식을 한 사람의 노하우로만 남기지 않고, 이지브레인 체인의 각 의료진이 동일한 순서로 자료를 확인할 수 있게 만드는 것이 필요했습니다. ENIT-AI는 그 과정을 입력, 분석, 검토, 리포트라는 제품 흐름으로 구조화했습니다.</p></div></article>
+      </div>
+
+      <figure className={classNames(card, "mt-5 grid grid-cols-[.9fr_1.1fr] overflow-hidden max-md:grid-cols-1")}>
+        <a href="/projects/neuroen/qeeg-sample.jpg" target="_blank" rel="noreferrer" className="grid place-items-center bg-white p-8"><Image src="/projects/neuroen/qeeg-sample.jpg" width={488} height={409} alt="1Hz부터 20Hz까지 주파수별 상대 파워를 두피 지도 형태로 표현한 qEEG 샘플" className="h-auto w-full max-w-[540px]" /></a>
+        <figcaption className="border-l border-line p-8 max-md:border-l-0 max-md:border-t"><p className={label}>qEEG 샘플 읽기</p><h3 className="mt-4 text-2xl font-black">숫자 신호를 뇌 지도로 바꾸면</h3><p className="mt-5 text-sm leading-7 text-muted">각 원은 머리를 위에서 내려다본 두피 지도입니다. 위쪽 돌출 부분은 코, 좌우는 귀 방향이며, 1Hz부터 20Hz까지 각 주파수에서 측정된 상대 파워의 분포를 색으로 나타냅니다.</p><div className="mt-6 space-y-4"><div className="rounded-lg border border-line bg-background p-4"><strong className="text-sm">가로·세로로 보는 방법</strong><p className="mt-2 text-sm leading-7 text-muted">지도 하나는 특정 주파수를 나타내고, 여러 지도를 나란히 보면 주파수에 따라 두피 영역의 분포가 어떻게 달라지는지 비교할 수 있습니다.</p></div><div className="rounded-lg border border-line bg-background p-4"><strong className="text-sm">색상이 의미하는 것</strong><p className="mt-2 text-sm leading-7 text-muted">각 지도 아래의 색상 눈금 안에서 상대적으로 낮은 값과 높은 값을 구분합니다. 빨간색 자체가 질환이나 이상을 뜻하는 것은 아니며, 측정 조건과 원시 EEG, 다른 임상 정보를 의료진이 함께 검토해야 합니다.</p></div></div><p className="mt-5 text-xs text-muted">이미지를 누르면 원본 크기로 확인할 수 있습니다.</p></figcaption>
+      </figure>
+
+      <p className="mt-3 text-xs text-muted">※ 이 qEEG 샘플 이미지는 설명을 위해 Google 이미지 검색에서 가져온 참고 자료입니다.</p>
+
+      <div className="mt-5 grid grid-cols-[1fr_40px_1fr_40px_1fr] items-center gap-2 max-md:grid-cols-1">
+        <div className={classNames(card, "p-5 text-center")}><span className="text-sm font-bold">개인별 qEEG·검사 정보</span><p className="mt-2 text-xs text-muted">사람마다 다른 신경생리 데이터</p></div><Arrow /><div className={classNames(card, "p-5 text-center")}><span className="text-sm font-bold">ENIT-AI 분석 흐름</span><p className="mt-2 text-xs text-muted">전처리·품질 검사·분류·리포트</p></div><Arrow /><div className={classNames(card, "p-5 text-center")}><span className="text-sm font-bold">의료진의 종합 판단</span><p className="mt-2 text-xs text-muted">환자 정보와 함께 검토</p></div>
+      </div>
+
+      <p className="mt-6 text-xs leading-6 text-muted">qEEG 설명 참고: <a className="underline underline-offset-4 hover:text-accent" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11297817/" target="_blank" rel="noreferrer">I-PROTECT 신경 모니터링 정의</a>, <a className="underline underline-offset-4 hover:text-accent" href="https://pubmed.ncbi.nlm.nih.gov/3074969/" target="_blank" rel="noreferrer">주파수 분석과 뇌 지도 관련 검토 논문</a></p>
+    </div>
+  );
+}
+
 export default function NeuroenProjectPage() {
   return (
     <main className="project-detail">
@@ -232,7 +261,9 @@ export default function NeuroenProjectPage() {
 
       <section className="border-b border-line py-24 max-md:py-16"><div className={wrap}><div className="flex flex-wrap gap-2"><span className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-[9px] font-bold text-accent">최근 프로젝트</span><span className="rounded-full border border-line px-3 py-1.5 text-[9px] text-muted">2025.03 — 2025.05</span></div><p className={classNames(label, "mt-10")}>뉴로엔 × 이지브레인</p><h1 className="mt-5 max-w-5xl text-[clamp(48px,8vw,104px)] font-black leading-[.95] tracking-[-.065em]">qEEG 분석을<br /><span className="text-accent">의료 서비스로.</span></h1><p className="mt-10 max-w-2xl text-base leading-8 text-muted">라벨 없는 qEEG 데이터에서 의미 있는 패턴을 찾는 모델 실험부터 의료진이 실제로 사용할 수 있는 웹 애플리케이션, 민감한 의료 데이터를 보호하는 분산 인프라까지 ENIT-AI의 기반을 구축한 프로젝트입니다.</p><div className="mt-12 grid grid-cols-4 border-y border-line max-md:grid-cols-2">{[["기간", "2025.03 — 2025.05"], ["분야", "의료 AI · 풀스택"], ["조직", "뉴로엔 · 이지브레인"], ["형태", "초기 서비스 기반 구축"]].map(([key, value]) => <div className="border-r border-line px-5 py-6 last:border-r-0 max-md:border-b" key={key}><span className="text-[9px] text-muted">{key}</span><strong className="mt-2 block text-xs">{value}</strong></div>)}</div></div></section>
 
-      <section className="py-24 max-md:py-16"><div className={wrap}><p className={label}>프로젝트 개요 / 01</p><div className="mt-6 grid grid-cols-[.7fr_1.3fr] gap-16 max-md:grid-cols-1 max-md:gap-8"><h2 className="text-[clamp(34px,5vw,64px)] font-black leading-[1.05] tracking-[-.05em]">모델 하나가 아닌<br />전체 제품을 만들었습니다.</h2><div className="space-y-5 text-sm leading-7 text-muted"><p>뉴로엔과 정신과 전문 병원 이지브레인이 함께 진행한 프로젝트로, 정신과 의료진이 qEEG 이미지를 입력하고 전처리·품질 검사·AI 분류·분석 리포트까지 확인할 수 있는 흐름을 구축했습니다.</p><p>초기 5명 규모의 팀에서 모델 실험, 웹 서비스, 데이터 보안과 서버 구성을 동시에 진행했으며 투자사 대상 개발 현황 발표가 가능한 수준의 서비스 기반을 완성했습니다.</p></div></div></div></section>
+      <section className="py-24 max-md:py-16"><div className={wrap}><ProjectBackground /></div></section>
+
+      <section className="border-t border-line py-24 max-md:py-16"><div className={wrap}><p className={label}>프로젝트 개요 / 01</p><div className="mt-6 grid grid-cols-1 gap-10"><h2 className="text-[clamp(34px,5vw,64px)] font-black leading-[1.05] tracking-[-.05em]">모델 하나가 아닌<br />전체 제품을 만들었습니다.</h2><div className="max-w-4xl space-y-5 text-sm leading-7 text-muted"><p>뉴로엔과 정신과 전문 병원 이지브레인이 함께 진행한 프로젝트로, 정신과 의료진이 qEEG 이미지를 입력하고 전처리·품질 검사·AI 분류·분석 리포트까지 확인할 수 있는 흐름을 구축했습니다.</p><p>초기 5명 규모의 팀에서 모델 실험, 웹 서비스, 데이터 보안과 서버 구성을 동시에 진행했으며 투자사 대상 개발 현황 발표가 가능한 수준의 서비스 기반을 완성했습니다.</p></div></div></div></section>
 
       <section className="border-y border-line py-24 max-md:py-16"><div className={wrap}><p className={label}>서비스 흐름 / 02</p><h2 className="mt-5 mb-10 text-[clamp(32px,5vw,58px)] font-black tracking-[-.045em]">qEEG 입력부터 리포트까지</h2><ProductFlow /><div className="mt-10"><InterfacePreview /></div><ServiceGallery /></div></section>
 
