@@ -72,6 +72,14 @@ const systemDiagramImages = [
   { src: "/projects/neuroen/system-v4.jpeg", width: 983, height: 1280, title: "버전 4 시스템 구성", description: "LLM을 Mac Mini로 분리하고 enit.ai와 in.enit.ai의 보안 연결 경로를 정리한 최종 구조", problem: "LLM은 충분한 메모리가 필요했고, 모델 학습을 위해 내부 qEEG 데이터를 대량으로 요청하면 네트워크 패킷이 급증할 가능성도 있었습니다.", decision: "저는 LLM을 메모리 여유가 있는 Mac Mini로 분리하고, 내부 서비스는 in.enit.ai, 외부 웹 서비스는 enit.ai로 경로를 구분했습니다. 필요한 데이터만 중계 API로 전달하는 원칙도 유지했습니다.", next: "최종적으로 의료 데이터의 경계, AI 연산, 웹 서비스와 LLM을 독립적으로 확장할 수 있는 기반을 만들었습니다. 대량 데이터 이동 최적화는 이후 단계의 과제로 남겼습니다." },
 ];
 
+const modelStages = [
+  { version: "모델 버전 1", title: "DeepCluster 기준선", src: "/projects/neuroen/model-v1.jpeg", width: 1280, height: 875, problem: "qEEG 데이터에 충분한 정답 라벨이 없어 일반적인 지도 학습부터 시작하기 어려웠습니다. 우선 데이터 자체에서 반복되는 패턴을 찾을 수 있는 기준선이 필요했습니다.", decision: "저는 ResNet50으로 특징을 추출하고 KMeans가 만든 의사 라벨로 다시 학습하는 DeepCluster 구조를 적용했습니다. 손실값과 함께 실루엣 점수를 관찰해 군집 분리 정도를 확인했습니다.", result: "전체 학습 흐름은 연결했지만 초기 구간에서 특징이 비슷해지는 붕괴와 과적합 경향이 나타났습니다.", next: "전체 이미지를 축소하면 고해상도 qEEG의 작은 영역별 특징이 사라질 수 있다고 보고, 지역 특징을 보존하는 방식을 고민했습니다." },
+  { version: "모델 버전 2", title: "패치 기반 특징 추출", src: "/projects/neuroen/model-v2.jpeg", width: 1280, height: 857, problem: "2000×1000 크기의 qEEG 이미지를 한 번에 축소하면 주파수별·영역별 패턴이 충분히 표현되지 않을 가능성이 있었습니다.", decision: "이미지를 200×200 패치로 나누어 지역 특징을 학습하고, 전체 이미지의 전역 특징과 패치의 지역 특징을 함께 결합했습니다. 전역·지역 투영 헤드도 각각 분리했습니다.", result: "특징 벡터가 더 다양한 정보를 담기 시작했고 군집 안정성도 일부 개선됐지만, 학습 초반의 붕괴 가능성은 남아 있었습니다.", next: "모델 구조뿐 아니라 입력의 잡음과 초기 가중치가 학습 불안정을 키우는지 확인할 필요가 있었습니다." },
+  { version: "모델 버전 3", title: "이진화와 초기화 안정화", src: "/projects/neuroen/model-v3.jpeg", width: 1280, height: 897, problem: "qEEG 이미지의 색상 범위와 잡음, 무작위 초기 가중치가 군집 중심을 계속 흔드는 원인일 수 있다고 판단했습니다.", decision: "저는 입력을 이진화해 핵심 형태를 강조하고, 합성곱 초기 가중치 범위를 조정했습니다. 특징을 L2 정규화하고 KMeans 초기화 반복 횟수도 늘렸습니다.", result: "초기 에포크에서 붕괴하는 빈도가 줄었고 실루엣 점수와 군집 품질이 이전보다 안정되는 흐름을 확인했습니다.", next: "입력 안정화만으로는 복잡한 qEEG 패턴을 충분히 표현하기 어려워, 특징 추출기 앞단의 깊이를 보강했습니다." },
+  { version: "모델 버전 4", title: "5단계 전처리 합성곱 블록", src: "/projects/neuroen/model-v4.jpeg", width: 1280, height: 1057, problem: "기본 ResNet의 첫 합성곱 계층만으로는 qEEG의 세부 구조를 단계적으로 압축하고 학습하기에 표현력이 부족하다고 보았습니다.", decision: "ResNet 앞에 5단계 사용자 정의 합성곱 블록을 추가하고 BatchNorm, ReLU, Dropout을 조합했습니다. 해상도를 점진적으로 줄이며 특징을 전달하도록 설계했습니다.", result: "학습 초반 특징 붕괴가 크게 줄고 의사 라벨의 신뢰도와 군집 품질이 개선되는 방향을 확인했습니다.", next: "모델이 스스로 만든 의사 라벨의 오류를 그대로 다시 학습하는 문제를 줄이기 위해, 더 안정적인 교사 모델이 필요했습니다." },
+  { version: "모델 버전 5", title: "BOSS 교사-학생 자기 증류", problem: "의사 라벨에는 불확실한 표본이 섞여 있고 학생 모델이 자신의 오류를 반복 학습할 가능성이 있었습니다. 긴 학습 중 붕괴가 발생하면 실험 전체를 다시 시작해야 하는 문제도 있었습니다.", decision: "저는 교사-학생 자기 증류를 적용하고 군집 중심에 가까운 상위 70% 표본만 학습에 사용했습니다. 실루엣 점수가 기준 이상일 때만 교사를 갱신하고, 상태 저장과 복구 로직을 추가했습니다.", result: "70 에포크 이후 붕괴가 줄고 실루엣 흐름이 안정됐으며, 문제가 생겨도 이전 상태로 돌아가 실험을 이어갈 수 있게 됐습니다.", next: "이후에는 qEEG 도메인에 적합한 증강 방식과 의료진이 해석할 수 있는 평가 기준을 더 정교하게 만드는 과제를 남겼습니다." },
+];
+
 function Arrow({ direction = "right" }: { direction?: "right" | "down" }) {
   return <span className={classNames("font-mono text-lg text-accent", direction === "down" && "rotate-90")}>→</span>;
 }
@@ -154,6 +162,29 @@ function ArchitectureEvolution() {
               {stage.zones.map((zone, zoneIndex) => <div key={zone.name}><div className={classNames("rounded-md border p-2", { "border-cyan-500/30 bg-cyan-500/5": zone.tone === "secure", "border-accent/30 bg-accent/5": zone.tone === "accent", "border-line": zone.tone === "default" })}><p className="mb-2 text-[8px] font-bold text-muted">{zone.name}</p><div className="flex flex-wrap gap-1">{zone.nodes.map((node) => <span className="rounded border border-line bg-background px-2 py-1 text-[8px]" key={node}>{node}</span>)}</div></div>{zoneIndex < stage.zones.length - 1 && <div className="py-1 text-center text-xs text-accent">↓</div>}</div>)}
             </div>
             <p className="mt-4 border-t border-line pt-4 text-[9px] font-bold leading-4 text-accent">{stage.change}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function BossModelDiagram() {
+  const nodes = ["qEEG 입력", "학생 모델", "KMeans 군집", "신뢰도 상위 70%", "교사 모델 갱신"];
+  return <div className="flex h-[520px] flex-col items-center justify-center gap-3 bg-[radial-gradient(circle_at_center,rgba(59,130,246,.12),transparent_55%)] p-8 max-md:h-auto">{nodes.map((node, index) => <div className="contents" key={node}><div className={classNames("w-full max-w-xs rounded-lg border p-4 text-center text-sm font-bold", index === 4 ? "border-accent bg-accent/10 text-accent" : "border-line bg-background")}>{node}</div>{index < nodes.length - 1 && <span className="text-xl text-accent">↓</span>}</div>)}<p className="mt-3 text-center text-xs leading-6 text-muted">실루엣 기준 충족 시 교사 갱신<br />붕괴 발생 시 이전 상태로 복구</p></div>;
+}
+
+function ModelEvolution() {
+  return (
+    <div>
+      <div className="mb-12"><p className={label}>모델 개발 과정 / 04</p><h2 className="mt-5 text-[clamp(36px,5vw,64px)] font-black leading-[1.06] tracking-[-.05em]">한 번에 완성하지 않고<br />문제를 따라 개선했습니다.</h2><p className="mt-7 max-w-4xl text-base leading-8 text-muted">라벨이 부족한 qEEG 데이터에서 시작해 특징 붕괴와 표현력 부족을 하나씩 확인했습니다. 각 버전은 이전 실험에서 발견한 문제를 해결하기 위한 다음 가설이었습니다.</p></div>
+      <div className="space-y-12">
+        {modelStages.map((model, index) => (
+          <article className={classNames(card, "grid grid-cols-2 overflow-hidden max-md:grid-cols-1")} key={model.version}>
+            <div className={classNames("overflow-hidden bg-white p-4", index % 2 === 1 && "order-2 max-md:order-none")}>
+              {model.src ? <a href={model.src} target="_blank" rel="noreferrer"><Image src={model.src} width={model.width} height={model.height} alt={`${model.title} 모델 구조와 고민을 직접 정리한 이미지`} className="h-[560px] w-full object-contain max-md:h-auto" sizes="(max-width: 768px) 100vw, 590px" /></a> : <BossModelDiagram />}
+            </div>
+            <div className="flex flex-col justify-center border-l border-line p-10 max-md:border-l-0 max-md:border-t max-md:p-6"><span className="font-mono text-sm font-bold text-accent">{model.version}</span><h3 className="mt-4 text-2xl font-black">{model.title}</h3><div className="mt-8 space-y-6"><div><strong className="text-sm text-accent">당시 문제</strong><p className="mt-2 text-sm leading-7 text-muted">{model.problem}</p></div><div><strong className="text-sm text-accent">제가 바꾼 점</strong><p className="mt-2 text-sm leading-7 text-muted">{model.decision}</p></div><div><strong className="text-sm text-accent">확인한 결과</strong><p className="mt-2 text-sm leading-7 text-muted">{model.result}</p></div><div className="rounded-lg border border-line bg-background p-5"><strong className="text-sm">다음 버전으로 이어진 이유</strong><p className="mt-2 text-sm leading-7 text-muted">{model.next}</p></div></div></div>
           </article>
         ))}
       </div>
@@ -269,7 +300,9 @@ export default function NeuroenProjectPage() {
 
       <section className="py-24 max-md:py-16"><div className={wrap}><p className={label}>담당 업무 / 03</p><div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line max-md:grid-cols-1">{responsibilities.map(([number, title, description]) => <article className="bg-background p-8" key={number}><span className="font-mono text-[10px] text-accent">{number}</span><h3 className="mt-5 text-xl font-black">{title}</h3><p className="mt-4 text-sm leading-7 text-muted">{description}</p></article>)}</div></div></section>
 
-      <section className="border-y border-line py-24 max-md:py-16"><div className={wrap}><SystemDiagramGallery /></div></section>
+      <section className="border-y border-line py-24 max-md:py-16"><div className={wrap}><ModelEvolution /></div></section>
+
+      <section className="border-b border-line py-24 max-md:py-16"><div className={wrap}><SystemDiagramGallery /></div></section>
 
       <section className="py-24 max-md:py-16"><div className={wrap}><DecisionJournal /></div></section>
 
