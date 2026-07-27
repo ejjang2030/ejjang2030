@@ -59,10 +59,10 @@ const decisionLogs = [
 ];
 
 const serviceScreens = [
-  { src: "/projects/neuroen/patient-input.jpg", width: 4014, height: 2473, title: "환자 정보와 qEEG 이미지 입력", description: "환자 기본 정보와 눈을 감은 상태·뜬 상태의 qEEG 이미지를 입력하는 화면" },
-  { src: "/projects/neuroen/process-steps.jpg", width: 4014, height: 2407, title: "qEEG 분석 진행 과정", description: "주파수 분해, 회색조 변환, 품질 검사와 분류 상태를 단계별로 확인하는 화면" },
-  { src: "/projects/neuroen/processed-images.jpg", width: 4014, height: 3175, title: "전처리 이미지 확인", description: "원본, 주파수 분해 결과와 회색조 변환 결과를 비교하는 화면" },
-  { src: "/projects/neuroen/analysis-results.jpg", width: 4014, height: 6172, title: "AI 분석 결과", description: "품질 검사와 분류 확률, 세부 결과를 확인하고 PDF 리포트를 생성하는 화면" },
+  { src: "/projects/neuroen/patient-input.jpg", width: 4014, height: 2473, title: "환자 정보와 qEEG 이미지 입력", description: "환자 기본 정보와 눈을 감은 상태·뜬 상태의 qEEG 이미지를 입력하는 화면", purpose: "분석을 시작하기 전에 환자 식별 정보와 두 가지 측정 상태의 qEEG 자료를 한 작업 단위로 묶는 화면입니다.", flow: "의료진은 환자 식별번호, 나이와 성별을 확인한 뒤 눈을 감은 상태와 눈을 뜬 상태의 이미지를 각각 등록합니다. 샘플 데이터로 전체 흐름을 시험할 수도 있습니다.", consideration: "제가 가장 중요하게 본 것은 두 이미지가 서로 바뀌거나 다른 환자 정보와 연결되지 않도록 입력 단계를 명확히 나누는 것이었습니다. 민감한 정보가 분석 목적으로만 사용되고 안전하게 저장된다는 안내도 화면 안에서 확인할 수 있게 했습니다." },
+  { src: "/projects/neuroen/process-steps.jpg", width: 4014, height: 2407, title: "qEEG 분석 진행 과정", description: "주파수 분해, 회색조 변환, 품질 검사와 분류 상태를 단계별로 확인하는 화면", purpose: "여러 AI 처리 작업을 하나의 대기 화면으로 숨기지 않고, 현재 어떤 단계가 실행 중인지 보여주는 화면입니다.", flow: "업로드가 끝나면 주파수 분해, 회색조 변환, 품질 검사, 패턴 분류가 순서대로 실행됩니다. 왼쪽에서는 전체 진행률을, 오른쪽에서는 각 단계의 상태를 확인합니다.", consideration: "모델 처리는 시간이 걸리고 중간 실패 가능성도 있으므로 의료진이 화면이 멈췄다고 느끼지 않게 해야 했습니다. 그래서 전체 진행률과 단계별 완료 상태를 동시에 보여주고, 문제가 생겼을 때 어느 단계부터 다시 확인해야 하는지 드러나도록 구성했습니다." },
+  { src: "/projects/neuroen/processed-images.jpg", width: 4014, height: 3175, title: "전처리 이미지 확인", description: "원본, 주파수 분해 결과와 회색조 변환 결과를 비교하는 화면", purpose: "AI가 어떤 입력을 받았는지 의료진이 직접 확인할 수 있도록 원본과 중간 처리 결과를 나란히 보여주는 화면입니다.", flow: "눈을 감은 상태와 뜬 상태를 좌우로 비교하고, 원본 이미지에서 주파수 분해와 회색조 변환을 거치며 데이터가 어떻게 바뀌었는지 아래 방향으로 확인합니다.", consideration: "결과 숫자만 제공하면 전처리 오류나 이미지 품질 문제를 발견하기 어렵습니다. 저는 모델의 입력 과정을 숨기지 않고 시각적으로 확인할 수 있게 해, 잘못된 입력을 바탕으로 결과가 생성되는 위험을 줄이고자 했습니다." },
+  { src: "/projects/neuroen/analysis-results.jpg", width: 4014, height: 6172, title: "AI 분석 결과", description: "품질 검사와 분류 확률, 세부 결과를 확인하고 PDF 리포트를 생성하는 화면", purpose: "품질 검사와 모델 분류 결과를 한곳에 모아 의료진이 분석 근거를 검토하고 리포트 생성 여부를 결정하는 화면입니다.", flow: "먼저 눈을 감은 상태와 뜬 상태의 잡음 여부와 심각도를 확인합니다. 이후 상위 예측, 전체 세부 확률과 유의 여부를 검토한 뒤 PDF를 내려받거나 분석 리포트를 생성합니다.", consideration: "확률이 높은 항목만 강조하면 결과가 확정 진단처럼 보일 수 있었습니다. 그래서 품질 검사, 상위 결과와 전체 결과를 함께 제공하고 수치를 비교할 수 있게 했습니다. 최종 해석과 리포트 사용 여부는 의료진이 환자 정보와 함께 판단하는 흐름을 유지했습니다." },
 ];
 
 const systemDiagramImages = [
@@ -242,13 +242,13 @@ function ServiceGallery() {
   return (
     <div className="mt-16">
       <div className="mb-8 flex items-end justify-between gap-6 max-md:block"><div><p className={label}>실제 웹 서비스 화면</p><h3 className="mt-3 text-2xl font-black">ENIT-AI 사용 흐름</h3></div><p className="max-w-sm text-xs leading-6 text-muted max-md:mt-3">이미지를 누르면 원본 크기로 확인할 수 있습니다.</p></div>
-      <div className="grid grid-cols-2 gap-5 max-md:grid-cols-1">
+      <div className="space-y-12">
         {serviceScreens.map((screen, index) => (
-          <figure key={screen.src} className={classNames(card, "overflow-hidden", index === 3 && "col-span-2 max-md:col-span-1")}>
-            <a href={screen.src} target="_blank" rel="noreferrer" className="group block overflow-hidden border-b border-line bg-white">
-              <Image src={screen.src} width={screen.width} height={screen.height} alt={screen.title} className={classNames("h-auto w-full transition-transform duration-500 group-hover:scale-[1.01]", index === 3 && "max-h-[760px] object-cover object-top")} sizes={index === 3 ? "(max-width: 768px) 100vw, 1180px" : "(max-width: 768px) 100vw, 590px"} />
+          <figure key={screen.src} className={classNames(card, "grid grid-cols-[1.1fr_.9fr] overflow-hidden max-lg:grid-cols-1")}>
+            <a href={screen.src} target="_blank" rel="noreferrer" className={classNames("group block overflow-hidden bg-white p-3", index % 2 === 1 && "order-2 max-lg:order-none")}>
+              <Image src={screen.src} width={screen.width} height={screen.height} alt={screen.title} className={classNames("h-[620px] w-full object-contain object-top transition-transform duration-500 group-hover:scale-[1.01] max-lg:h-auto", index === 3 && "object-cover")} sizes="(max-width: 1024px) 100vw, 650px" />
             </a>
-            <figcaption className="p-5"><span className="font-mono text-[9px] text-accent">화면 0{index + 1}</span><h4 className="mt-2 text-sm font-bold">{screen.title}</h4><p className="mt-2 text-[11px] leading-5 text-muted">{screen.description}</p></figcaption>
+            <figcaption className="flex flex-col justify-center border-l border-line p-9 max-lg:border-l-0 max-lg:border-t max-md:p-6"><span className="font-mono text-sm font-bold text-accent">화면 0{index + 1}</span><h4 className="mt-4 text-2xl font-black">{screen.title}</h4><p className="mt-3 text-sm leading-7 text-muted">{screen.description}</p><div className="mt-8 space-y-6"><div><strong className="text-sm text-accent">화면의 목적</strong><p className="mt-2 text-sm leading-7 text-muted">{screen.purpose}</p></div><div><strong className="text-sm text-accent">사용 흐름</strong><p className="mt-2 text-sm leading-7 text-muted">{screen.flow}</p></div><div className="rounded-lg border border-line bg-background p-5"><strong className="text-sm">제가 설계하며 고려한 점</strong><p className="mt-2 text-sm leading-7 text-muted">{screen.consideration}</p></div></div><p className="mt-6 text-xs text-muted">이미지를 누르면 원본 크기로 확인할 수 있습니다.</p></figcaption>
           </figure>
         ))}
       </div>
