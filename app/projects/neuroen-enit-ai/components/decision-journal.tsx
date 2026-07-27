@@ -36,7 +36,7 @@ const logs = [
 export function DecisionJournal() {
   return (
     <>
-      <div className="grid grid-cols-[.75fr_1.25fr] gap-16 max-md:grid-cols-1 max-md:gap-5">
+      <div>
         <div>
           <SectionLabel>설계와 실험의 기록</SectionLabel>
           <h2 className="mt-5 text-[clamp(36px,5vw,64px)] font-black leading-[1.06] tracking-[-.05em]">
@@ -45,7 +45,7 @@ export function DecisionJournal() {
             결정의 이유.
           </h2>
         </div>
-        <p className="self-end text-base leading-8 text-muted">
+        <p className="mt-8 max-w-4xl text-base leading-8 text-muted">
           완성된 화면만으로는 어떤 문제를 만났고 왜 방향을 바꿨는지 드러나지
           않습니다. 실제 고민했던 선택과 배운 점을 정리했습니다.
         </p>
@@ -53,14 +53,14 @@ export function DecisionJournal() {
       <div className="mt-14 border-t border-line">
         {logs.map(([number, title, decision, learning]) => (
           <article
-            className="grid grid-cols-[70px_.8fr_1.2fr] gap-8 border-b border-line py-10 max-lg:grid-cols-[50px_1fr]"
+            className="grid grid-cols-[70px_1fr] gap-x-8 gap-y-6 border-b border-line py-10 max-md:grid-cols-[44px_1fr] max-md:gap-x-4"
             key={number}
           >
             <span className="font-mono text-sm font-bold text-accent">
               {number}
             </span>
             <h3 className="text-xl font-black leading-8">{title}</h3>
-            <div className="space-y-5 max-lg:col-start-2">
+            <div className="col-start-2 space-y-5">
               <DetailBlock title="제가 선택한 방향">{decision}</DetailBlock>
               <DetailBlock title="이 과정에서 배운 점" highlighted>
                 {learning}
