@@ -1,14 +1,16 @@
 import classNames from "classnames";
+import Link from "next/link";
 import ThemeToggle from "./components/theme-toggle";
 
 const projects = [
   {
     index: "01",
-    category: "AI · 컴퓨터 비전",
-    title: "고속도로 AI 관제",
+    category: "의료 AI · 풀스택 · 인프라",
+    title: "뉴로엔 ENIT-AI",
     description:
-      "CCTV 영상에서 차량과 돌발 상황을 탐지하고 실시간 관제 화면으로 연결한 AI 서비스입니다.",
-    tags: ["YOLO", "FastAPI", "React"],
+      "qEEG 데이터를 분류하고 AI 분석 리포트를 생성하는 의료진용 웹 서비스와 분산 시스템 기반을 구축했습니다.",
+    tags: ["PyTorch", "FastAPI", "React", "Docker"],
+    href: "/projects/neuroen-enit-ai",
   },
   {
     index: "02",
@@ -17,6 +19,7 @@ const projects = [
     description:
       "상품, 주문, 재고와 고객 데이터를 하나의 흐름으로 연결한 업무 관리 시스템입니다.",
     tags: ["Next.js", "Spring", "PostgreSQL"],
+    href: "#",
   },
   {
     index: "03",
@@ -25,6 +28,7 @@ const projects = [
     description:
       "문서 안의 정보를 빠르게 검색하고 근거와 함께 답변하는 지능형 검색 서비스입니다.",
     tags: ["LLM", "RAG", "Python"],
+    href: "#",
   },
 ];
 
@@ -279,7 +283,8 @@ export default function Home() {
           </div>
           <div className="mt-16 border-t border-line">
             {projects.map((project) => (
-              <article
+              <Link
+                href={project.href}
                 key={project.index}
                 className="group grid grid-cols-[80px_1fr_1fr_50px] gap-8 border-b border-line py-10 transition-all hover:bg-surface max-md:grid-cols-[40px_1fr_30px] max-md:gap-3"
               >
@@ -312,7 +317,7 @@ export default function Home() {
                 <span className="text-xl transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 max-md:col-start-3 max-md:row-start-1">
                   <Arrow />
                 </span>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
