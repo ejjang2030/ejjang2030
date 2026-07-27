@@ -65,6 +65,13 @@ const serviceScreens = [
   { src: "/projects/neuroen/analysis-results.jpg", width: 4014, height: 6172, title: "AI 분석 결과", description: "품질 검사와 분류 확률, 세부 결과를 확인하고 PDF 리포트를 생성하는 화면" },
 ];
 
+const systemDiagramImages = [
+  { src: "/projects/neuroen/system-v1.jpeg", width: 1147, height: 767, title: "초기 시스템 구성", description: "병원 내부 Mac Mini에서 데이터베이스, 백엔드, 프론트엔드와 AI 모델을 함께 운영한 초기 구조", problem: "처음에는 빠르게 기능을 검증하는 것이 가장 중요했습니다. 별도의 인프라를 만들기보다 기존 Mac Mini 안에 데이터베이스, 웹 서비스와 AI 모델을 모두 두면 개발 속도를 높일 수 있다고 판단했습니다.", decision: "저는 구성 요소 사이의 거리를 줄여 qEEG 입력부터 분석까지 전체 흐름을 먼저 연결했습니다. 외부 공개보다 병원 내부에서 실제 사용 흐름을 검증하는 데 집중했습니다.", next: "한 서버에 모든 기능이 모이면서 연산 자원과 확장성의 한계가 명확해졌고, AI 연산과 의료 데이터 저장 위치를 분리할 필요가 생겼습니다." },
+  { src: "/projects/neuroen/system-v2.jpeg", width: 965, height: 1280, title: "버전 2 시스템 구성", description: "GPU 서버로 웹과 AI 연산을 이전하고 병원 내부 Ubuntu 서버에 MinIO 저장소를 분리한 구조", problem: "모델 학습과 추론에는 더 강한 GPU가 필요했지만, 민감한 qEEG 원본을 외부 서버에 함께 보관하는 것은 적절하지 않았습니다.", decision: "제가 선택한 방향은 연산과 저장을 분리하는 것이었습니다. 웹 서비스와 AI 연산은 GPU 서버로 옮기고, 원본 데이터는 병원 내부 Ubuntu 서버의 MinIO에 보관하도록 설계했습니다.", next: "물리적으로 분리하는 것만으로는 충분하지 않았습니다. 외부 서비스가 내부 데이터를 어떤 경로와 권한으로 읽을지에 대한 보안 계층이 추가로 필요했습니다." },
+  { src: "/projects/neuroen/system-v3.jpeg", width: 1261, height: 1280, title: "버전 3 시스템 구성", description: "Cloudflare, HTTPS와 중계 API를 추가하고 병원 내부에서 Llama 3를 검증한 구조", problem: "GPU 서버가 MinIO에 직접 접근하도록 열어두면 내부 데이터에 대한 권한 범위가 지나치게 넓어질 수 있었습니다. HTTP 연결과 서비스별 접근 경로도 정리해야 했습니다.", decision: "저는 Cloudflare와 HTTPS를 적용하고, MinIO 앞에 조회 범위를 제한하는 중계 API를 두는 방향을 고민했습니다. 동시에 Ubuntu 서버에서 Llama 3를 실행해 리포트 생성 가능성을 검증했습니다.", next: "보안 경로는 정리됐지만 Ubuntu 서버의 자원으로 더 큰 LLM을 안정적으로 운영하기는 어려웠습니다. LLM 실행 위치를 다시 검토해야 했습니다." },
+  { src: "/projects/neuroen/system-v4.jpeg", width: 983, height: 1280, title: "버전 4 시스템 구성", description: "LLM을 Mac Mini로 분리하고 enit.ai와 in.enit.ai의 보안 연결 경로를 정리한 최종 구조", problem: "LLM은 충분한 메모리가 필요했고, 모델 학습을 위해 내부 qEEG 데이터를 대량으로 요청하면 네트워크 패킷이 급증할 가능성도 있었습니다.", decision: "저는 LLM을 메모리 여유가 있는 Mac Mini로 분리하고, 내부 서비스는 in.enit.ai, 외부 웹 서비스는 enit.ai로 경로를 구분했습니다. 필요한 데이터만 중계 API로 전달하는 원칙도 유지했습니다.", next: "최종적으로 의료 데이터의 경계, AI 연산, 웹 서비스와 LLM을 독립적으로 확장할 수 있는 기반을 만들었습니다. 대량 데이터 이동 최적화는 이후 단계의 과제로 남겼습니다." },
+];
+
 function Arrow({ direction = "right" }: { direction?: "right" | "down" }) {
   return <span className={classNames("font-mono text-lg text-accent", direction === "down" && "rotate-90")}>→</span>;
 }
@@ -154,6 +161,22 @@ function ArchitectureEvolution() {
   );
 }
 
+function SystemDiagramGallery() {
+  return (
+    <div>
+      <div className="mb-10 grid grid-cols-[.8fr_1.2fr] gap-12 max-md:grid-cols-1 max-md:gap-4"><div><p className={label}>시스템 발전 과정 / 04</p><h2 className="mt-5 text-[clamp(32px,5vw,58px)] font-black leading-[1.08] tracking-[-.045em]">고민하며 그린<br />시스템 구성도.</h2></div><p className="self-end text-base leading-8 text-muted">단일 내부 서버에서 시작해 의료 데이터 보관과 AI 연산을 분리하고, 보안 중계 계층과 전용 LLM 서버를 더해가는 과정에서 직접 작성한 구성도입니다.</p></div>
+      <div className="space-y-12">
+        {systemDiagramImages.map((diagram, index) => (
+          <figure key={diagram.src} className={classNames(card, "grid grid-cols-2 overflow-hidden max-md:grid-cols-1")}>
+            <a href={diagram.src} target="_blank" rel="noreferrer" className={classNames("group block overflow-hidden bg-white p-4", index % 2 === 1 && "order-2 max-md:order-none")}><Image src={diagram.src} width={diagram.width} height={diagram.height} alt={diagram.title} className="h-[620px] w-full object-contain transition-transform duration-500 group-hover:scale-[1.01] max-md:h-auto" sizes="(max-width: 768px) 100vw, 590px" /></a>
+            <figcaption className="flex flex-col justify-center border-l border-line p-10 max-md:border-l-0 max-md:border-t max-md:p-6"><div className="flex items-center justify-between"><span className="font-mono text-sm font-bold text-accent">0{index + 1}</span><span className="text-xs text-muted">원본 구성도 ↗</span></div><h3 className="mt-5 text-2xl font-black">{diagram.title}</h3><p className="mt-3 text-sm leading-7 text-muted">{diagram.description}</p><div className="mt-8 space-y-6"><div><strong className="text-sm text-accent">당시 고민</strong><p className="mt-2 text-sm leading-7 text-muted">{diagram.problem}</p></div><div><strong className="text-sm text-accent">제가 선택한 방향</strong><p className="mt-2 text-sm leading-7 text-muted">{diagram.decision}</p></div><div className="rounded-lg border border-line bg-background p-5"><strong className="text-sm">다음 구성으로 이어진 이유</strong><p className="mt-2 text-sm leading-7 text-muted">{diagram.next}</p></div></div></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function DecisionJournal() {
   return (
     <div>
@@ -165,7 +188,7 @@ function DecisionJournal() {
             <h3 className="text-xl font-black leading-8 max-lg:col-start-2">{log.title}</h3>
             <div className="space-y-5 max-lg:col-start-2">
               <div><strong className="text-xs text-accent">마주한 문제</strong><p className="mt-2 text-sm leading-7 text-muted">{log.context}</p></div>
-              <div><strong className="text-xs text-accent">내가 선택한 방향</strong><p className="mt-2 text-sm leading-7 text-muted">{log.decision}</p></div>
+              <div><strong className="text-xs text-accent">제가 선택한 방향</strong><p className="mt-2 text-sm leading-7 text-muted">{log.decision}</p></div>
               <div className="rounded-lg border border-line bg-surface p-5"><strong className="text-xs">이 과정에서 배운 점</strong><p className="mt-2 text-sm leading-7 text-muted">{log.learning}</p></div>
             </div>
           </article>
@@ -215,7 +238,7 @@ export default function NeuroenProjectPage() {
 
       <section className="py-24 max-md:py-16"><div className={wrap}><p className={label}>담당 업무 / 03</p><div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line max-md:grid-cols-1">{responsibilities.map(([number, title, description]) => <article className="bg-background p-8" key={number}><span className="font-mono text-[10px] text-accent">{number}</span><h3 className="mt-5 text-xl font-black">{title}</h3><p className="mt-4 text-sm leading-7 text-muted">{description}</p></article>)}</div></div></section>
 
-      <section className="border-y border-line py-24 max-md:py-16"><div className={wrap}><ArchitectureEvolution /><div className="mt-20 border-t border-line pt-20"><ArchitectureDiagram /></div></div></section>
+      <section className="border-y border-line py-24 max-md:py-16"><div className={wrap}><SystemDiagramGallery /></div></section>
 
       <section className="py-24 max-md:py-16"><div className={wrap}><DecisionJournal /></div></section>
 
