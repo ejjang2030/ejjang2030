@@ -37,8 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [
         {
           url: "/opengraph2.png",
-          width: 1426,
-          height: 617,
+          width: 1200,
+          height: 630,
           alt: `${introContent.profile.name} 포트폴리오 미리보기`,
         },
       ],
