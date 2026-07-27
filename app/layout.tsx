@@ -1,31 +1,47 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import { introContent } from "./content/intro";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
-  title: "장은재 | 개발자 포트폴리오",
-  description:
-    "사용자 경험과 안정적인 시스템을 함께 만드는 개발자 장은재의 포트폴리오입니다.",
-  manifest: "/manifest.webmanifest",
-  icons: {
-    icon: "/icon.svg",
-  },
-  openGraph: {
-    title: "장은재 | AI 제품 개발자",
-    description:
-      "AI 모델부터 API와 웹서비스까지 연결해 실제로 쓰이는 제품을 만듭니다.",
-    type: "website",
-    locale: "ko_KR",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "장은재 | AI 제품 개발자",
-    description:
-      "AI 모델부터 API와 웹서비스까지 연결해 실제로 쓰이는 제품을 만듭니다.",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const requestHeaders = await headers();
+  const host =
+    requestHeaders.get("x-forwarded-host") ??
+    requestHeaders.get("host") ??
+    "localhost:3000";
+  const protocol =
+    requestHeaders.get("x-forwarded-proto") ??
+    (host.includes("localhost") ? "http" : "https");
+  const configuredUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ??
+    process.env.VERCEL_URL;
+  const siteUrl = configuredUrl
+    ? configuredUrl.startsWith("http")
+      ? configuredUrl
+      : `https://${configuredUrl}`
+    : `${protocol}://${host}`;
+  const description = introContent.description.join(" ");
+
+  return {
+    metadataBase: new URL(siteUrl),
+    title: `${introContent.profile.name} | ${introContent.profile.role}`,
+    description,
+    manifest: "/manifest.webmanifest",
+    icons: { icon: "/icon.svg" },
+    openGraph: {
+      title: `${introContent.profile.name} | ${introContent.profile.role}`,
+      description,
+      type: "website",
+      locale: "ko_KR",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${introContent.profile.name} | ${introContent.profile.role}`,
+      description,
+    },
+  };
+}
 
 export default function RootLayout({
   children,
