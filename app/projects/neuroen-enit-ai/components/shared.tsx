@@ -12,7 +12,7 @@ export function SectionLabel({
   return (
     <p
       className={classNames(
-        "text-xs font-bold tracking-[.2em] text-accent",
+        "text-base font-bold tracking-[.16em] text-accent",
         className,
       )}
     >

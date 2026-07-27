@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
+import TerminalWindow from "./components/terminal-window";
 import ThemeToggle from "./components/theme-toggle";
 
 const projects = [
@@ -54,35 +55,59 @@ function Arrow() {
 
 function SystemVisual() {
   return (
-    <div className="relative h-full min-h-[520px] overflow-hidden bg-[#081322] text-slate-100 max-md:min-h-[340px]">
+    <div className="relative h-full min-h-[520px] overflow-hidden bg-[#081322] text-slate-100 max-md:min-h-[430px]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_26%,rgba(59,130,246,.32),transparent_28%),radial-gradient(circle_at_24%_82%,rgba(14,165,233,.2),transparent_32%)]" />
       <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(96,165,250,.22)_1px,transparent_1px),linear-gradient(90deg,rgba(96,165,250,.22)_1px,transparent_1px)] [background-size:48px_48px]" />
-      <div className="absolute right-[9%] top-[12%] rounded-full border border-blue-300/25 bg-slate-950/45 px-4 py-2 backdrop-blur-sm">
-        <span className="mr-2 inline-block size-1.5 rounded-full bg-blue-400" />
-        <span className="font-mono text-[9px] tracking-[.16em] text-blue-200">
-          AI · API · WEB
-        </span>
-      </div>
-      <div className="absolute inset-x-[9%] bottom-[11%]">
-        <p className="mb-4 font-mono text-[9px] tracking-[.2em] text-blue-300">
-          하나의 제품으로 연결합니다
-        </p>
-        <p className="max-w-md text-[clamp(28px,3.4vw,46px)] font-black leading-[1.12] tracking-[-.045em]">
-          AI는 제품이 될 때
-          <br />
-          비로소 가치를 만듭니다.
-        </p>
-        <div className="mt-7 flex items-center gap-2" aria-hidden="true">
-          {["모델", "API", "서비스"].map((label, index) => (
-            <div className="flex items-center gap-2" key={label}>
-              {index > 0 && <span className="h-px w-5 bg-blue-300/35" />}
-              <span className="rounded border border-blue-300/20 bg-slate-950/35 px-3 py-1.5 text-[9px] text-blue-100/80">
-                {label}
-              </span>
-            </div>
-          ))}
+      <TerminalWindow>
+        <div
+          className="flex gap-2 border-b border-slate-700/70 pb-5"
+          aria-hidden="true"
+        >
+          <span className="size-2 rounded-full bg-red-400" />
+          <span className="size-2 rounded-full bg-amber-300" />
+          <span className="size-2 rounded-full bg-emerald-400" />
         </div>
-      </div>
+        <div className="flex items-center gap-4 border-b border-slate-700/70 py-5">
+          <div className="relative size-14 shrink-0 overflow-hidden rounded-xl border border-slate-600">
+            <Image
+              src="/profile.jpg"
+              alt="장은재 프로필 사진"
+              fill
+              sizes="56px"
+              className="object-cover object-top"
+              priority
+            />
+          </div>
+          <div>
+            <strong className="block text-base text-white">장은재</strong>
+            <span className="mt-1 block text-xs text-slate-400">
+              AI 제품 개발자
+            </span>
+          </div>
+        </div>
+        <div className="flex-1 py-5 font-mono text-[13px] leading-7 text-slate-300 max-md:text-xs max-md:leading-6">
+          <p>
+            <span className="text-violet-300">const</span> 개발자 = &#123;
+          </p>
+          <p className="pl-4">
+            이름: <span className="text-cyan-300">&quot;장은재&quot;</span>,
+          </p>
+          <p className="pl-4">
+            집중 분야:{" "}
+            <span className="text-cyan-300">&quot;AI 제품 개발&quot;</span>,
+          </p>
+          <p className="pl-4">연결: [</p>
+          <p className="pl-8 text-cyan-300">
+            &quot;모델&quot;, &quot;API&quot;, &quot;웹 서비스&quot;
+          </p>
+          <p className="pl-4">]</p>
+          <p>&#125;</p>
+        </div>
+        <div className="flex items-center gap-3 border-t border-slate-700/70 pt-5 text-xs text-slate-400">
+          <span className="size-2 rounded-full bg-emerald-400" />
+          새로운 문제를 제품으로 해결하고 있습니다
+        </div>
+      </TerminalWindow>
     </div>
   );
 }
@@ -144,10 +169,7 @@ export default function Home() {
             "flex flex-col justify-center border-r border-line py-16 max-md:min-h-[500px] max-md:border-r-0",
           )}
         >
-          <div className="mb-12 grid size-16 place-items-center rounded-full border border-line bg-surface font-mono text-lg font-black text-accent">
-            EJ
-          </div>
-          <p className="mb-4 text-[10px] font-bold tracking-[.2em] text-accent">
+          <p className="mb-4 text-[16px] font-bold tracking-[.2em] text-accent">
             풀스택 · AI 개발자
           </p>
           <h1 className="max-w-xl text-[clamp(42px,5vw,72px)] font-black leading-[1.10] tracking-[-.055em]">
@@ -157,9 +179,11 @@ export default function Home() {
             장은재입니다.
             <br />
           </h1>
-          <p className="mt-7 max-w-lg text-base leading-8 text-muted">
-            사용자의 문제를 이해하고 AI 모델, 안정적인 API, <br /> 직관적인
-            인터페이스를 연결해 실제로 쓰이는 제품을 만듭니다.
+          <p className="text-[20px] mt-7 max-w-lg text-base leading-8 text-muted">
+            사용자의 문제를 이해하고
+            <br /> AI 모델, 안정적인 API, 직관적인 인터페이스를 연결해
+            <br />
+            실제로 쓰이는 제품을 만듭니다.
           </p>
           <div className="mt-10 flex gap-3">
             <a
@@ -239,7 +263,7 @@ export default function Home() {
             "flex flex-col justify-center py-24",
           )}
         >
-          <p className="text-[10px] font-bold tracking-[.2em] text-accent">
+          <p className="text-[16px] font-bold tracking-[.2em] text-accent">
             소개 / 01
           </p>
           <h2 className="mt-6 text-[clamp(38px,5vw,68px)] font-black leading-[1.05] tracking-[-.05em]">
@@ -265,7 +289,7 @@ export default function Home() {
         <div className={classNames(wrap, pagePadding)}>
           <div className="flex items-end justify-between gap-8 max-md:block">
             <div>
-              <p className="text-[10px] font-bold tracking-[.2em] text-accent">
+              <p className="text-[16px] font-bold tracking-[.2em] text-accent">
                 선택한 작업 / 02
               </p>
               <h2 className="mt-5 text-[clamp(42px,6vw,82px)] font-black tracking-[-.055em]">
@@ -353,7 +377,7 @@ export default function Home() {
             "border-r border-line py-24 max-md:border-r-0",
           )}
         >
-          <p className="text-[10px] font-bold tracking-[.2em] text-accent">
+          <p className="text-[16px] font-bold tracking-[.2em] text-accent">
             주요 역량 / 03
           </p>
           <h2 className="mt-6 text-[clamp(38px,5vw,68px)] font-black leading-[1.05] tracking-[-.05em]">
