@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LearningCredentials from "./components/learning-credentials";
 import TerminalWindow from "./components/terminal-window";
+import { introContent } from "./content/intro";
 
 const projects = [
   {
@@ -201,9 +202,9 @@ function SystemVisual() {
             />
           </div>
           <div>
-            <strong className="block text-base text-white">장은재</strong>
+            <strong className="block text-base text-white">{introContent.profile.name}</strong>
             <span className="mt-1 block text-xs text-slate-400">
-              AI 제품 개발자
+              {introContent.profile.role}
             </span>
           </div>
         </div>
@@ -212,22 +213,22 @@ function SystemVisual() {
             <span className="text-violet-300">const</span> 개발자 = &#123;
           </p>
           <p className="pl-4">
-            이름: <span className="text-cyan-300">&quot;장은재&quot;</span>,
+            이름: <span className="text-cyan-300">&quot;{introContent.profile.name}&quot;</span>,
           </p>
           <p className="pl-4">
             집중 분야:{" "}
-            <span className="text-cyan-300">&quot;AI 제품 개발&quot;</span>,
+            <span className="text-cyan-300">&quot;{introContent.profile.focus}&quot;</span>,
           </p>
           <p className="pl-4">연결: [</p>
           <p className="pl-8 text-cyan-300">
-            &quot;모델&quot;, &quot;API&quot;, &quot;웹 서비스&quot;
+            {introContent.profile.connects.map((item) => `"${item}"`).join(", ")}
           </p>
           <p className="pl-4">]</p>
           <p>&#125;</p>
         </div>
         <div className="flex items-center gap-3 border-t border-slate-700/70 pt-5 text-xs text-slate-400">
           <span className="size-2 rounded-full bg-emerald-400" />
-          새로운 문제를 제품으로 해결하고 있습니다
+          {introContent.profile.status}
         </div>
       </TerminalWindow>
     </div>
@@ -293,20 +294,19 @@ export default function Home() {
           )}
         >
           <p className="mb-4 text-[16px] font-bold tracking-[.2em] text-accent">
-            풀스택 · AI 개발자
+            {introContent.eyebrow}
           </p>
           <h1 className="max-w-xl text-[clamp(42px,5vw,72px)] font-black leading-[1.10] tracking-[-.055em]">
-            안녕하세요, <br />
-            <span className="highlight-mark">Product Engineer</span>
+            {introContent.greeting} <br />
+            <span className="highlight-mark">{introContent.highlightedRole}</span>
             <br />
-            장은재입니다.
+            {introContent.nameLine}
             <br />
           </h1>
           <p className="text-[20px] mt-7 max-w-lg text-base leading-8 text-muted">
-            사용자의 문제를 이해하고
-            <br /> AI 모델, 안정적인 API, 직관적인 인터페이스를 연결해
-            <br />
-            실제로 쓰이는 제품을 만듭니다.
+            {introContent.description.map((line) => (
+              <span className="block" key={line}>{line}</span>
+            ))}
           </p>
           <div className="mt-10 flex gap-3">
             <a
