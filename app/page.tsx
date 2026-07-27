@@ -654,10 +654,16 @@ export default function Home() {
           <span>© 2026 EUNJAE JANG</span>
           <div className="flex text-[16px] gap-6">
             <a href="https://github.com/ejjang2030">깃허브</a>
-            <a href="#top">맨 위로 ↑</a>
           </div>
         </div>
       </footer>
+      <a
+        href="#top"
+        aria-label="페이지 맨 위로 이동"
+        className="fixed bottom-6 right-6 z-40 grid size-12 place-items-center rounded-full border border-line bg-foreground text-xl text-background shadow-lg transition-all hover:-translate-y-1 hover:border-accent hover:bg-accent hover:text-button-text focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+      >
+        <span aria-hidden="true">↑</span>
+      </a>
     </main>
   );
 }
