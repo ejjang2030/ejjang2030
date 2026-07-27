@@ -9,12 +9,20 @@ export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    const current = document.documentElement.dataset.theme as Theme | undefined;
-    setTheme(current ?? "dark");
+    const savedTheme = localStorage.getItem("theme") as Theme | null;
+    const preferredTheme: Theme = window.matchMedia("(prefers-color-scheme: light)").matches
+      ? "light"
+      : "dark";
+    const initialTheme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : preferredTheme;
+
+    document.documentElement.dataset.theme = initialTheme;
+    document.documentElement.style.colorScheme = initialTheme;
+    setTheme(initialTheme);
   }, []);
 
   const toggleTheme = () => {
-    const nextTheme: Theme = theme === "dark" ? "light" : "dark";
+    const currentTheme = document.documentElement.dataset.theme as Theme | undefined;
+    const nextTheme: Theme = currentTheme === "light" ? "dark" : "light";
     document.documentElement.dataset.theme = nextTheme;
     document.documentElement.style.colorScheme = nextTheme;
     localStorage.setItem("theme", nextTheme);
@@ -30,6 +38,7 @@ export default function ThemeToggle() {
           "[&_.theme-icon]:-rotate-12": theme === "light",
         },
       )}
+      data-testid="theme-toggle"
       type="button"
       onClick={toggleTheme}
       aria-label={`${theme === "dark" ? "라이트" : "다크"} 모드로 전환`}
