@@ -21,10 +21,21 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button className="themeToggle" type="button" onClick={toggleTheme}
-      aria-label={`${theme === "dark" ? "라이트" : "다크"} 모드로 전환`}>
-      <span className="themeIcon" aria-hidden="true">{theme === "dark" ? "☀" : "☾"}</span>
-      <span className="themeText">{theme === "dark" ? "Light" : "Dark"}</span>
+    <button
+      className="flex cursor-pointer items-center gap-[7px] border-0 bg-transparent py-2 text-foreground outline-offset-4"
+      type="button"
+      onClick={toggleTheme}
+      aria-label={`${theme === "dark" ? "라이트" : "다크"} 모드로 전환`}
+    >
+      <span
+        className="grid size-[26px] place-items-center rounded-full border border-line text-sm text-accent transition-transform duration-200 hover:rotate-[18deg] hover:border-accent"
+        aria-hidden="true"
+      >
+        {theme === "dark" ? "☀" : "☾"}
+      </span>
+      <span className="text-xs text-muted max-md:hidden">
+        {theme === "dark" ? "Light" : "Dark"}
+      </span>
     </button>
   );
 }
