@@ -34,11 +34,20 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       type: "website",
       locale: "ko_KR",
+      images: [
+        {
+          url: "/opengraph2.png",
+          width: 1426,
+          height: 617,
+          alt: `${introContent.profile.name} 포트폴리오 미리보기`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${introContent.profile.name} | ${introContent.profile.role}`,
       description,
+      images: ["/opengraph2.png"],
     },
   };
 }
