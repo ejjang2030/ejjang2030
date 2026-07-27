@@ -423,24 +423,28 @@ export default function Home() {
               </h2>
             </div>
           </div>
-          <div className="mt-16 grid max-w-[460px] grid-cols-1">
+          <div className="mt-14 grid grid-cols-1">
             {projects.map((project) => (
               <Link
                 href={project.href}
                 key={project.index}
-                className="group flex min-h-[580px] flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl"
+                className="group grid min-h-[400px] cursor-pointer grid-cols-[1.05fr_.95fr] overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent max-md:grid-cols-1"
               >
-                <div className="h-[220px] overflow-hidden border-b border-line bg-[#081322]">
+                <div className="relative min-h-[400px] overflow-hidden border-r border-line bg-[#081322] max-md:min-h-[260px] max-md:border-b max-md:border-r-0">
                   <Image
                     src={project.image.src}
                     width={project.image.width}
                     height={project.image.height}
                     alt={project.image.alt}
-                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                    sizes="(max-width:768px) 100vw, 460px"
+                    className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.035]"
+                    sizes="(max-width:768px) 100vw, 55vw"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/45 via-transparent to-transparent" />
+                  <span className="absolute bottom-5 left-5 rounded-full border border-white/30 bg-slate-950/70 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm">
+                    실제 서비스 화면
+                  </span>
                 </div>
-                <div className="flex flex-1 flex-col p-7">
+                <div className="flex flex-col p-9 max-md:p-6">
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-sm font-bold text-accent">
                       {project.index}
@@ -449,7 +453,7 @@ export default function Home() {
                       {project.category}
                     </p>
                   </div>
-                  <h3 className="mt-6 text-[clamp(25px,2.5vw,36px)] font-black leading-tight tracking-[-.04em]">
+                  <h3 className="mt-7 text-[clamp(28px,3vw,44px)] font-black leading-tight tracking-[-.04em]">
                     {project.title}
                   </h3>
                   <p className="mt-5 text-sm leading-7 text-muted">
@@ -465,9 +469,12 @@ export default function Home() {
                       </span>
                     ))}
                   </div>
-                  <div className="mt-auto flex items-center justify-between border-t border-line pt-6 text-sm font-bold">
-                    <span>프로젝트 상세 보기</span>
-                    <span className="text-xl text-accent transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
+                  <div className="mt-auto flex items-center justify-between rounded-xl bg-accent px-5 py-4 text-sm font-bold text-button-text transition-colors group-hover:bg-foreground group-hover:text-background">
+                    <span>
+                      프로젝트 상세 보기
+                      <small className="ml-2 font-medium opacity-75">클릭하여 확인</small>
+                    </span>
+                    <span className="text-xl transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
                       <Arrow />
                     </span>
                   </div>
