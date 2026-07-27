@@ -78,6 +78,24 @@
   will-change: transform;
 }
 
+.marquee-shell {
+  cursor: default;
+}
+
+.marquee-item {
+  cursor: pointer;
+  transition: color 300ms ease, -webkit-text-stroke-color 300ms ease;
+}
+
+.marquee-shell:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-item:hover {
+  color: var(--accent);
+  -webkit-text-stroke-color: var(--accent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -203,12 +203,25 @@ export default function Home() {
       </section>
 
       <div
-        className="overflow-hidden border-y border-line py-2"
+        className="marquee-shell overflow-hidden border-y border-line py-2"
         aria-hidden="true"
       >
         <div className="marquee-track flex w-max whitespace-nowrap text-[clamp(52px,8vw,122px)] font-black leading-none tracking-[-.06em] text-transparent [-webkit-text-stroke:1px_var(--line)]">
-          <span className="pr-12">AI 제품 개발 · 풀스택 · 시스템 설계 · 사용자 경험 ·</span>
-          <span className="pr-12">AI 제품 개발 · 풀스택 · 시스템 설계 · 사용자 경험 ·</span>
+          {[0, 1].map((group) => (
+            <span className="pr-12" key={group}>
+              {[
+                "AI 제품 개발",
+                "풀스택",
+                "시스템 설계",
+                "사용자 경험",
+              ].map((label) => (
+                <span key={label}>
+                  <span className="marquee-item">{label}</span>
+                  <span className="marquee-separator"> · </span>
+                </span>
+              ))}
+            </span>
+          ))}
         </div>
       </div>
 
