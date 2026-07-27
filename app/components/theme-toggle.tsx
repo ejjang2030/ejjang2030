@@ -1,5 +1,6 @@
 "use client";
 
+import classNames from "classnames";
 import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
@@ -22,13 +23,22 @@ export default function ThemeToggle() {
 
   return (
     <button
-      className="flex cursor-pointer items-center gap-[7px] border-0 bg-transparent py-2 text-foreground outline-offset-4"
+      className={classNames(
+        "flex cursor-pointer items-center gap-[7px] border-0 bg-transparent py-2 text-foreground outline-offset-4",
+        {
+          "[&_.theme-icon]:rotate-0": theme === "dark",
+          "[&_.theme-icon]:-rotate-12": theme === "light",
+        },
+      )}
       type="button"
       onClick={toggleTheme}
       aria-label={`${theme === "dark" ? "라이트" : "다크"} 모드로 전환`}
     >
       <span
-        className="grid size-[26px] place-items-center rounded-full border border-line text-sm text-accent transition-transform duration-200 hover:rotate-[18deg] hover:border-accent"
+        className={classNames(
+          "theme-icon",
+          "grid size-[26px] place-items-center rounded-full border border-line text-sm text-accent transition-transform duration-200 hover:rotate-[18deg] hover:border-accent",
+        )}
         aria-hidden="true"
       >
         {theme === "dark" ? "☀" : "☾"}

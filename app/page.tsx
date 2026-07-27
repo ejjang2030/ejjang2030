@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import ThemeToggle from "./components/theme-toggle";
 
 const projects = [
@@ -41,7 +42,7 @@ export default function Home() {
   return (
     <main>
       <header
-        className={`${wrap} relative z-10 flex h-[88px] items-center justify-between`}
+        className={classNames(wrap, "relative z-10 flex h-[88px] items-center justify-between")}
       >
         <a
           className="text-2xl font-black tracking-[-1px]"
@@ -83,7 +84,7 @@ export default function Home() {
       </header>
 
       <section
-        className={`${wrap} relative min-h-[calc(100vh-88px)] overflow-hidden pt-[12vh] max-md:pt-[10vh]`}
+        className={classNames(wrap, "relative min-h-[calc(100vh-88px)] overflow-hidden pt-[12vh] max-md:pt-[10vh]")}
         id="top"
       >
         <div className={label}>
@@ -131,7 +132,7 @@ export default function Home() {
       </section>
 
       <section
-        className={`${wrap} grid grid-cols-[1fr_3fr] border-t border-line py-[150px] max-md:grid-cols-1 max-md:gap-[60px] max-md:py-[100px]`}
+        className={classNames(wrap, "grid grid-cols-[1fr_3fr] border-t border-line py-[150px] max-md:grid-cols-1 max-md:gap-[60px] max-md:py-[100px]")}
         id="about"
       >
         <div className={label}>01 / ABOUT</div>
@@ -162,7 +163,7 @@ export default function Home() {
       </section>
 
       <section
-        className={`${wrap} border-t border-line py-[150px] max-md:py-[100px]`}
+        className={classNames(wrap, "border-t border-line py-[150px] max-md:py-[100px]")}
         id="projects"
       >
         <div className="flex items-end justify-between max-md:block">
@@ -204,7 +205,7 @@ export default function Home() {
       </section>
 
       <section
-        className={`${wrap} grid grid-cols-2 gap-[100px] border-t border-line py-[150px] max-md:grid-cols-1 max-md:gap-[60px] max-md:py-[100px]`}
+        className={classNames(wrap, "grid grid-cols-2 gap-[100px] border-t border-line py-[150px] max-md:grid-cols-1 max-md:gap-[60px] max-md:py-[100px]")}
         id="skills"
       >
         <div>
@@ -231,7 +232,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={`${wrap} py-40 text-center max-md:py-[110px]`}>
+      <section className={classNames(wrap, "py-40 text-center max-md:py-[110px]")}>
         <span className="text-[11px] tracking-[.22em] text-muted">
           HAVE A PROJECT IN MIND?
         </span>
@@ -249,7 +250,7 @@ export default function Home() {
       </section>
 
       <footer
-        className={`${wrap} flex min-h-[100px] items-center justify-between border-t border-line text-xs text-muted max-md:flex-wrap max-md:gap-6 max-md:py-[30px]`}
+        className={classNames(wrap, "flex min-h-[100px] items-center justify-between border-t border-line text-xs text-muted max-md:flex-wrap max-md:gap-6 max-md:py-[30px]")}
       >
         <a
           className="text-2xl font-black tracking-[-1px] text-foreground"
