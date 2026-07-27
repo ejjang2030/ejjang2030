@@ -5,6 +5,14 @@ import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
+function applyTheme(theme: Theme) {
+  const root = document.documentElement;
+  root.dataset.theme = theme;
+  root.classList.remove("light", "dark");
+  root.classList.add(theme);
+  root.style.colorScheme = theme;
+}
+
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("dark");
 
@@ -15,17 +23,19 @@ export default function ThemeToggle() {
       : "dark";
     const initialTheme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : preferredTheme;
 
-    document.documentElement.dataset.theme = initialTheme;
-    document.documentElement.style.colorScheme = initialTheme;
+    applyTheme(initialTheme);
     setTheme(initialTheme);
   }, []);
 
   const toggleTheme = () => {
     const currentTheme = document.documentElement.dataset.theme as Theme | undefined;
     const nextTheme: Theme = currentTheme === "light" ? "dark" : "light";
-    document.documentElement.dataset.theme = nextTheme;
-    document.documentElement.style.colorScheme = nextTheme;
-    localStorage.setItem("theme", nextTheme);
+    applyTheme(nextTheme);
+    try {
+      localStorage.setItem("theme", nextTheme);
+    } catch {
+      // Privacy settings can block storage; visual switching should still work.
+    }
     setTheme(nextTheme);
   };
 
@@ -41,6 +51,7 @@ export default function ThemeToggle() {
       data-testid="theme-toggle"
       type="button"
       onClick={toggleTheme}
+      aria-pressed={theme === "light"}
       aria-label={`${theme === "dark" ? "라이트" : "다크"} 모드로 전환`}
     >
       <span
@@ -53,7 +64,7 @@ export default function ThemeToggle() {
         {theme === "dark" ? "☀" : "☾"}
       </span>
       <span className="text-xs text-muted max-md:hidden">
-        {theme === "dark" ? "Light" : "Dark"}
+        {theme === "dark" ? "라이트" : "다크"}
       </span>
     </button>
   );

@@ -3,271 +3,393 @@ import ThemeToggle from "./components/theme-toggle";
 
 const projects = [
   {
-    number: "01",
-    title: "AI 기반 정신건강 분석",
+    index: "01",
+    category: "AI · 컴퓨터 비전",
+    title: "고속도로 AI 관제",
     description:
-      "qEEG Brain Mapping 데이터를 활용해 정신건강 상태를 분류하고 결과를 직관적으로 보여주는 서비스입니다.",
-    tags: ["Next.js", "FastAPI", "PyTorch"],
-    href: "#",
+      "CCTV 영상에서 차량과 돌발 상황을 탐지하고 실시간 관제 화면으로 연결한 AI 서비스입니다.",
+    tags: ["YOLO", "FastAPI", "React"],
   },
   {
-    number: "02",
-    title: "법무관리 시스템",
+    index: "02",
+    category: "풀스택 · 업무 시스템",
+    title: "커머스 운영 시스템",
     description:
-      "복잡한 법무 업무를 한눈에 파악하고 팀의 진행 상황을 효율적으로 관리하는 대시보드입니다.",
-    tags: ["React", "TypeScript", "PostgreSQL"],
-    href: "#",
+      "상품, 주문, 재고와 고객 데이터를 하나의 흐름으로 연결한 업무 관리 시스템입니다.",
+    tags: ["Next.js", "Spring", "PostgreSQL"],
   },
   {
-    number: "03",
-    title: "Linux 보안 시스템",
+    index: "03",
+    category: "AI · 지능형 검색",
+    title: "문서 기반 지능형 검색",
     description:
-      "Gooroom OS, PAM, systemd와 데이터베이스 복제를 활용한 안정적인 망분리 보안 환경입니다.",
-    tags: ["Linux", "MariaDB", "Docker"],
-    href: "#",
+      "문서 안의 정보를 빠르게 검색하고 근거와 함께 답변하는 지능형 검색 서비스입니다.",
+    tags: ["LLM", "RAG", "Python"],
   },
 ];
 
-const skills = [
-  { group: "Frontend", items: "React · Next.js · TypeScript · JavaScript" },
-  { group: "Backend", items: "FastAPI · Flask · Spring · PostgreSQL" },
-  { group: "AI & System", items: "PyTorch · OpenCV · Linux · Docker" },
+const capabilities = [
+  ["01", "프론트엔드", "React, Next.js, TypeScript"],
+  ["02", "백엔드", "FastAPI, Spring, PostgreSQL"],
+  ["03", "AI와 시스템", "PyTorch, OpenCV, Linux, Docker"],
 ];
 
-const wrap =
-  "mx-auto w-[min(1180px,calc(100%-48px))] max-md:w-[min(1180px,calc(100%-32px))]";
-const label = "text-[11px] font-bold tracking-[.2em] text-muted";
+const wrap = "mx-auto w-full max-w-[1440px]";
+const pagePadding = "px-10 max-md:px-5";
+
+function Arrow() {
+  return <span aria-hidden="true">↗</span>;
+}
+
+function SystemVisual() {
+  return (
+    <div className="relative h-full min-h-[620px] overflow-hidden bg-[#081322] text-slate-100 max-md:min-h-[430px]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_26%,rgba(59,130,246,.32),transparent_28%),radial-gradient(circle_at_24%_82%,rgba(14,165,233,.2),transparent_32%)]" />
+      <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(96,165,250,.22)_1px,transparent_1px),linear-gradient(90deg,rgba(96,165,250,.22)_1px,transparent_1px)] [background-size:48px_48px]" />
+      <div className="absolute left-[8%] top-[12%] w-[58%] rounded-xl border border-blue-300/20 bg-slate-950/60 p-5 shadow-2xl backdrop-blur-sm">
+        <div className="mb-6 flex gap-1.5">
+          <span className="size-2 rounded-full bg-red-400" />
+          <span className="size-2 rounded-full bg-amber-400" />
+          <span className="size-2 rounded-full bg-emerald-400" />
+        </div>
+        <div className="space-y-3 font-mono text-[10px] text-blue-200/75">
+          <p>
+            <span className="text-cyan-300">const</span> 개발자 = &#123;
+          </p>
+          <p className="pl-4">
+            집중분야: <span className="text-white">&quot;AI 제품 개발&quot;</span>,
+          </p>
+          <p className="pl-4">
+            기술: [
+            <span className="text-white">
+              &quot;모델&quot;, &quot;API&quot;, &quot;웹&quot;
+            </span>
+            ],
+          </p>
+          <p className="pl-4">
+            상태:{" "}
+            <span className="text-emerald-300">&quot;개발 중&quot;</span>
+          </p>
+          <p>&#125;</p>
+        </div>
+      </div>
+      <div className="absolute bottom-[13%] right-[7%] w-[56%] rounded-xl border border-slate-600/70 bg-slate-950/85 p-5 shadow-2xl">
+        <p className="font-mono text-[9px] tracking-[.18em] text-blue-300">
+          실시간 시스템 현황
+        </p>
+        <div className="mt-5 grid grid-cols-3 gap-2">
+          {[
+            ["92.9", "mAP50"],
+            ["89.3", "F1"],
+            ["24/7", "가동"],
+          ].map(([value, label]) => (
+            <div key={label} className="rounded-md border border-slate-700 p-3">
+              <strong className="block text-lg text-white">{value}</strong>
+              <span className="text-[8px] text-slate-500">{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="absolute bottom-8 left-8">
+        <p className="text-[clamp(24px,3vw,42px)] font-black tracking-[-.04em]">
+          AI는 제품이 될 때
+          <br />
+          비로소 가치를 만듭니다.
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
     <main>
-      <header
-        className={classNames(wrap, "relative z-10 flex h-[88px] items-center justify-between")}
-      >
-        <a
-          className="text-2xl font-black tracking-[-1px]"
-          href="#top"
-          aria-label="홈"
+      <header className="border-b border-line bg-background">
+        <div
+          className={classNames(
+            wrap,
+            pagePadding,
+            "flex h-[74px] items-center justify-between",
+          )}
         >
-          EJ<span className="text-accent">.</span>
-        </a>
-        <nav
-          className="flex items-center gap-[34px] text-sm max-md:gap-[15px]"
-          aria-label="주요 메뉴"
-        >
-          <a
-            className="transition-colors hover:text-accent max-md:hidden"
-            href="#about"
-          >
-            소개
+          <a href="#top" className="flex items-center gap-2 text-sm font-black">
+            <span className="grid size-7 place-items-center rounded-md bg-accent text-[10px] text-button-text">
+              EJ
+            </span>
+            개발자 포트폴리오
           </a>
-          <a
-            className="transition-colors hover:text-accent max-md:hidden"
-            href="#projects"
+          <nav
+            className="flex items-center gap-14 text-xs max-md:gap-4"
+            aria-label="주요 메뉴"
           >
-            프로젝트
-          </a>
-          <a
-            className="transition-colors hover:text-accent max-md:hidden"
-            href="#skills"
-          >
-            기술
-          </a>
-          <ThemeToggle />
-          <a
-            className="rounded-full border border-line px-5 py-3 transition-colors hover:border-accent"
-            href="mailto:ejjang2030@gmail.com"
-          >
-            연락하기
-          </a>
-        </nav>
+            <a className="hover:text-accent max-md:hidden" href="#work">
+              프로젝트
+            </a>
+            <a className="hover:text-accent max-md:hidden" href="#about">
+              소개
+            </a>
+            <a
+              className="hover:text-accent max-md:hidden"
+              href="mailto:ejjang2030@gmail.com"
+            >
+              연락처
+            </a>
+            <ThemeToggle />
+            <a
+              href="mailto:ejjang2030@gmail.com"
+              className="bg-foreground px-6 py-3 text-[10px] font-bold text-background max-md:px-4"
+            >
+              인사하기 👋
+            </a>
+          </nav>
+        </div>
       </header>
 
       <section
-        className={classNames(wrap, "relative min-h-[calc(100vh-88px)] overflow-hidden pt-[12vh] max-md:pt-[10vh]")}
         id="top"
+        className={classNames(
+          wrap,
+          "grid min-h-[620px] grid-cols-2 border-x border-line max-md:grid-cols-1",
+        )}
       >
-        <div className={label}>
-          <span className="mr-2.5 inline-block size-[7px] rounded-full bg-accent shadow-[0_0_16px_var(--accent)]" />{" "}
-          AVAILABLE FOR NEW PROJECTS
-        </div>
-        <h1 className="my-[26px] max-w-[900px] text-[clamp(56px,8vw,108px)] font-bold leading-[.98] tracking-[-.065em]">
-          복잡한 문제를
-          <br />
-          <em className="not-italic text-accent">명확한 경험</em>으로.
-        </h1>
-        <p className="text-lg leading-[1.8] text-body-copy max-md:text-[15px]">
-          안녕하세요, 풀스택 개발자{" "}
-          <strong className="text-foreground">장은재</strong>입니다.
-          <br />
-          AI와 견고한 시스템을 연결해 실제로 쓰이는 제품을 만듭니다.
-        </p>
-        <div className="mt-[38px] flex gap-3">
-          <a
-            className="rounded-sm bg-accent px-[22px] py-4 text-sm font-bold text-button-text"
-            href="#projects"
-          >
-            프로젝트 보기 <span className="ml-5">↘</span>
-          </a>
-          <a
-            className="rounded-sm border border-line px-[22px] py-4 text-sm font-bold transition-colors hover:border-accent"
-            href="mailto:ejjang2030@gmail.com"
-          >
-            이메일 보내기
-          </a>
-        </div>
         <div
-          className="absolute right-[-30px] top-20 size-[460px] opacity-65 max-md:right-[-160px] max-md:top-[170px] max-md:size-[300px]"
-          aria-hidden="true"
+          className={classNames(
+            pagePadding,
+            "flex flex-col justify-center border-r border-line py-20 max-md:min-h-[500px] max-md:border-r-0",
+          )}
         >
-          <div className="orbit-animation absolute inset-[10%] animate-[orbit-spin_18s_linear_infinite] rounded-full border border-orbit after:absolute after:left-[12%] after:top-[14%] after:size-2.5 after:rounded-full after:bg-accent after:shadow-[0_0_20px_var(--accent)]" />
-          <div className="orbit-animation absolute inset-[25%] animate-[orbit-spin_12s_linear_infinite_reverse] rounded-full border border-orbit after:absolute after:left-[12%] after:top-[14%] after:size-2.5 after:rounded-full after:bg-accent after:shadow-[0_0_20px_var(--accent)]" />
-          <div className="absolute inset-[41%] grid place-items-center rounded-full border border-orbit-core font-black text-accent">
+          <div className="mb-12 grid size-16 place-items-center rounded-full border border-line bg-surface font-mono text-lg font-black text-accent">
             EJ
           </div>
-        </div>
-        <div className="absolute bottom-9 left-0 text-[10px] tracking-[.18em] text-muted">
-          SCROLL TO EXPLORE <span className="ml-3 text-accent">↓</span>
-        </div>
-      </section>
-
-      <section
-        className={classNames(wrap, "grid grid-cols-[1fr_3fr] border-t border-line py-[150px] max-md:grid-cols-1 max-md:gap-[60px] max-md:py-[100px]")}
-        id="about"
-      >
-        <div className={label}>01 / ABOUT</div>
-        <div>
-          <h2 className="mb-[60px] text-[clamp(40px,5vw,68px)] font-bold leading-[1.08] tracking-[-.045em]">
-            기술보다 먼저,
+          <p className="mb-4 text-[10px] font-bold tracking-[.2em] text-accent">
+            풀스택 · AI 개발자
+          </p>
+          <h1 className="max-w-xl text-[clamp(42px,5vw,72px)] font-black leading-[1.08] tracking-[-.055em]">
+            안녕하세요, 장은재입니다.
             <br />
-            문제를 이해합니다.
-          </h2>
-          <div className="grid grid-cols-[1.4fr_1fr] gap-20 max-md:grid-cols-1 max-md:gap-10">
-            <p className="m-0 text-lg leading-[1.9] text-soft-copy">
-              좋은 제품은 화려한 기술이 아니라 정확한 질문에서 시작한다고
-              믿습니다. 사용자 경험부터 시스템 구조까지 함께 바라보며 오래 쓰일
-              수 있는 해답을 설계합니다.
-            </p>
-            <div className="flex gap-[55px]">
-              <div className="flex flex-col">
-                <strong className="text-5xl text-accent">4+</strong>
-                <span className="mt-2 text-xs text-muted">Focus Areas</span>
-              </div>
-              <div className="flex flex-col">
-                <strong className="text-5xl text-accent">∞</strong>
-                <span className="mt-2 text-xs text-muted">Curiosity</span>
-              </div>
-            </div>
+            <span className="text-muted">AI 제품 개발자</span>
+          </h1>
+          <p className="mt-7 max-w-lg text-base leading-8 text-muted">
+            사용자의 문제를 이해하고 AI 모델, 안정적인 API, 직관적인
+            인터페이스를 연결해 실제로 쓰이는 제품을 만듭니다.
+          </p>
+          <div className="mt-10 flex gap-3">
+            <a
+              href="#about"
+              className="bg-foreground px-7 py-4 text-xs font-bold text-background"
+            >
+              더 알아보기
+            </a>
+            <a
+              href="#work"
+              className="border border-line px-7 py-4 text-xs font-bold transition-colors hover:border-accent"
+            >
+              프로젝트 보기
+            </a>
           </div>
         </div>
+        <SystemVisual />
       </section>
 
-      <section
-        className={classNames(wrap, "border-t border-line py-[150px] max-md:py-[100px]")}
-        id="projects"
+      <div
+        className="overflow-hidden border-y border-line py-2"
+        aria-hidden="true"
       >
-        <div className="flex items-end justify-between max-md:block">
-          <div className={label}>02 / SELECTED WORK</div>
-          <h2 className="mb-10 text-[clamp(40px,5vw,68px)] font-bold leading-[1.08] tracking-[-.045em] max-md:mt-6">
-            선택한 프로젝트
-          </h2>
-        </div>
-        <div>
-          {projects.map((project) => (
-            <a
-              className="group grid grid-cols-[80px_1fr_60px] gap-[30px] border-t border-line px-3.5 py-[38px] transition-all last:border-b hover:bg-surface hover:pl-7 max-md:grid-cols-[35px_1fr_25px] max-md:gap-3 max-md:px-0 max-md:py-[30px]"
-              href={project.href}
-              key={project.number}
-            >
-              <span className="text-xs text-accent">{project.number}</span>
-              <div>
-                <h3 className="mb-3 text-[27px] font-bold max-md:text-[21px]">
-                  {project.title}
-                </h3>
-                <p className="mb-5 max-w-[700px] leading-[1.6] text-muted max-md:text-sm">
-                  {project.description}
+        <p className="whitespace-nowrap text-center text-[clamp(52px,8vw,122px)] font-black leading-none tracking-[-.06em] text-transparent [-webkit-text-stroke:1px_var(--line)]">
+          AI 제품 개발 · 풀스택 · 시스템 설계 · 사용자 경험
+        </p>
+      </div>
+
+      <section
+        id="about"
+        className={classNames(
+          wrap,
+          "grid grid-cols-2 border-x border-line max-md:grid-cols-1",
+        )}
+      >
+        <div className="min-h-[560px] border-r border-line max-md:border-r-0">
+          <div className="relative h-full min-h-[560px] overflow-hidden bg-surface p-10 max-md:min-h-[420px] max-md:p-5">
+            <div className="absolute -left-20 bottom-0 size-[430px] rounded-full border border-line" />
+            <div className="absolute -left-4 bottom-16 size-[300px] rounded-full border border-line" />
+            <div className="relative z-10 grid h-full place-items-center">
+              <div className="w-[76%] rotate-[-4deg] rounded-xl border border-line bg-background p-6 shadow-2xl">
+                <p className="font-mono text-[9px] tracking-[.2em] text-accent">
+                  작업 방식
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      className="rounded-full border border-line px-2.5 py-1.5 text-[11px] text-tag-copy"
-                      key={tag}
+                <div className="mt-8 space-y-5">
+                  {[
+                    "01. 문제와 사용자 이해",
+                    "02. 작게 설계하고 빠르게 검증",
+                    "03. 안정적으로 연결하고 운영",
+                  ].map((item) => (
+                    <div
+                      className="border-b border-line pb-4 text-sm font-bold"
+                      key={item}
                     >
-                      {tag}
-                    </span>
+                      {item}
+                    </div>
                   ))}
                 </div>
               </div>
-              <span className="text-right text-2xl">↗</span>
-            </a>
-          ))}
+            </div>
+          </div>
+        </div>
+        <div
+          className={classNames(
+            pagePadding,
+            "flex flex-col justify-center py-24",
+          )}
+        >
+          <p className="text-[10px] font-bold tracking-[.2em] text-accent">
+            소개 / 01
+          </p>
+          <h2 className="mt-6 text-[clamp(38px,5vw,68px)] font-black leading-[1.05] tracking-[-.05em]">
+            기술보다 먼저,
+            <br />
+            문제를 봅니다.
+          </h2>
+          <p className="mt-8 max-w-xl text-base leading-8 text-muted">
+            좋은 제품은 기술의 수보다 해결하는 문제의 선명함에서 시작한다고
+            믿습니다. 프론트엔드와 백엔드, AI와 시스템의 경계를 나누지 않고 제품
+            전체를 바라봅니다.
+          </p>
+          <a
+            href="mailto:ejjang2030@gmail.com"
+            className="mt-10 flex w-fit items-center gap-8 border-b border-accent pb-2 text-sm font-bold"
+          >
+            함께 이야기하기 <Arrow />
+          </a>
+        </div>
+      </section>
+
+      <section id="work" className="border-y border-line py-24 max-md:py-16">
+        <div className={classNames(wrap, pagePadding)}>
+          <div className="flex items-end justify-between gap-8 max-md:block">
+            <div>
+              <p className="text-[10px] font-bold tracking-[.2em] text-accent">
+                선택한 작업 / 02
+              </p>
+              <h2 className="mt-5 text-[clamp(42px,6vw,82px)] font-black tracking-[-.055em]">
+                프로젝트 목록
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm leading-7 text-muted max-md:mt-5">
+              모델부터 서비스 화면까지 직접 연결하며 완성한 대표 프로젝트입니다.
+            </p>
+          </div>
+          <div className="mt-16 border-t border-line">
+            {projects.map((project) => (
+              <article
+                key={project.index}
+                className="group grid grid-cols-[80px_1fr_1fr_50px] gap-8 border-b border-line py-10 transition-all hover:bg-surface max-md:grid-cols-[40px_1fr_30px] max-md:gap-3"
+              >
+                <span className="font-mono text-xs text-accent">
+                  {project.index}
+                </span>
+                <div>
+                  <p className="text-[9px] font-bold tracking-[.16em] text-muted">
+                    {project.category}
+                  </p>
+                  <h3 className="mt-3 text-[clamp(24px,3vw,42px)] font-black tracking-[-.04em]">
+                    {project.title}
+                  </h3>
+                </div>
+                <div className="max-md:col-span-2 max-md:col-start-2">
+                  <p className="max-w-lg text-sm leading-7 text-muted">
+                    {project.description}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-line px-3 py-1 text-[9px] text-muted"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <span className="text-xl transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 max-md:col-start-3 max-md:row-start-1">
+                  <Arrow />
+                </span>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <section
-        className={classNames(wrap, "grid grid-cols-2 gap-[100px] border-t border-line py-[150px] max-md:grid-cols-1 max-md:gap-[60px] max-md:py-[100px]")}
-        id="skills"
+        className={classNames(
+          wrap,
+          "grid grid-cols-2 border-x border-line max-md:grid-cols-1",
+        )}
       >
-        <div>
-          <div className={label}>03 / CAPABILITIES</div>
-          <h2 className="mt-0 mb-[60px] text-[clamp(40px,5vw,68px)] font-bold leading-[1.08] tracking-[-.045em]">
-            아이디어를 제품으로
+        <div
+          className={classNames(
+            pagePadding,
+            "border-r border-line py-24 max-md:border-r-0",
+          )}
+        >
+          <p className="text-[10px] font-bold tracking-[.2em] text-accent">
+            주요 역량 / 03
+          </p>
+          <h2 className="mt-6 text-[clamp(38px,5vw,68px)] font-black leading-[1.05] tracking-[-.05em]">
+            아이디어에서
             <br />
-            만드는 기술.
+            실제 서비스까지.
           </h2>
         </div>
-        <div>
-          {skills.map((skill, index) => (
+        <div className="py-14">
+          {capabilities.map(([number, title, stack]) => (
             <div
-              className="grid grid-cols-[45px_1fr] border-t border-line py-7"
-              key={skill.group}
+              key={number}
+              className="grid grid-cols-[60px_1fr] border-b border-line px-10 py-8 first:border-t max-md:px-5"
             >
-              <span className="text-[11px] text-accent">0{index + 1}</span>
+              <span className="font-mono text-[10px] text-accent">
+                {number}
+              </span>
               <div>
-                <h3 className="mb-2.5 text-[22px] font-bold">{skill.group}</h3>
-                <p className="leading-[1.6] text-muted">{skill.items}</p>
+                <h3 className="text-xl font-black">{title}</h3>
+                <p className="mt-2 text-xs text-muted">{stack}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className={classNames(wrap, "py-40 text-center max-md:py-[110px]")}>
-        <span className="text-[11px] tracking-[.22em] text-muted">
-          HAVE A PROJECT IN MIND?
-        </span>
-        <h2 className="my-[28px] mb-[50px] text-[clamp(50px,7vw,90px)] font-bold leading-none tracking-[-.06em]">
-          함께 멋진 것을
-          <br />
-          <em className="not-italic text-accent">만들어 볼까요?</em>
-        </h2>
-        <a
-          className="inline-block border-b border-accent pb-[9px] text-lg"
-          href="mailto:ejjang2030@gmail.com"
-        >
-          ejjang2030@gmail.com <span className="ml-[15px] text-accent">↗</span>
-        </a>
+      <section className="border-t border-line">
+        <div className={classNames(wrap, pagePadding, "py-28 text-center")}>
+          <p className="text-[10px] font-bold tracking-[.2em] text-accent">
+            함께할 프로젝트가 있나요?
+          </p>
+          <h2 className="mx-auto mt-6 max-w-4xl text-[clamp(44px,7vw,96px)] font-black leading-none tracking-[-.06em]">
+            함께 멋진 제품을
+            <br />
+            <span className="text-accent">만들어 볼까요?</span>
+          </h2>
+          <a
+            href="mailto:ejjang2030@gmail.com"
+            className="mt-12 inline-flex items-center gap-8 bg-accent px-7 py-4 text-sm font-bold text-button-text"
+          >
+            대화 시작하기 <Arrow />
+          </a>
+        </div>
       </section>
 
-      <footer
-        className={classNames(wrap, "flex min-h-[100px] items-center justify-between border-t border-line text-xs text-muted max-md:flex-wrap max-md:gap-6 max-md:py-[30px]")}
-      >
-        <a
-          className="text-2xl font-black tracking-[-1px] text-foreground"
-          href="#top"
+      <footer className="border-t border-line">
+        <div
+          className={classNames(
+            wrap,
+            pagePadding,
+            "flex h-24 items-center justify-between text-[10px] text-muted",
+          )}
         >
-          EJ<span className="text-accent">.</span>
-        </a>
-        <p className="max-md:order-3 max-md:w-full">
-          © 2026 Eunjae Jang. Built with Next.js.
-        </p>
-        <div className="flex gap-6">
-          <a className="hover:text-accent" href="#">
-            GitHub
-          </a>
-          <a className="hover:text-accent" href="#">
-            LinkedIn
-          </a>
+          <span>© 2026 EUNJAE JANG</span>
+          <div className="flex gap-6">
+            <a href="#">깃허브</a>
+            <a href="#">링크드인</a>
+            <a href="#top">맨 위로 ↑</a>
+          </div>
         </div>
       </footer>
     </main>

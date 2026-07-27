@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 :root,
-:root[data-theme="dark"] {
+:root[data-theme="dark"],
+:root.dark {
   --background: #0b1120;
   --surface: #111b2e;
   --foreground: #f1f5f9;
@@ -16,7 +17,8 @@
   --button-text: #07111f;
 }
 
-:root[data-theme="light"] {
+:root[data-theme="light"],
+:root.light {
   --background: #f8fafc;
   --surface: #eef4fa;
   --foreground: #0f172a;
