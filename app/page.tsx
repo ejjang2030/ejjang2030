@@ -61,7 +61,8 @@ function SystemVisual() {
             <span className="text-cyan-300">const</span> 개발자 = &#123;
           </p>
           <p className="pl-4">
-            집중분야: <span className="text-white">&quot;AI 제품 개발&quot;</span>,
+            집중분야:{" "}
+            <span className="text-white">&quot;AI 제품 개발&quot;</span>,
           </p>
           <p className="pl-4">
             기술: [
@@ -71,8 +72,7 @@ function SystemVisual() {
             ],
           </p>
           <p className="pl-4">
-            상태:{" "}
-            <span className="text-emerald-300">&quot;개발 중&quot;</span>
+            상태: <span className="text-emerald-300">&quot;개발 중&quot;</span>
           </p>
           <p>&#125;</p>
         </div>

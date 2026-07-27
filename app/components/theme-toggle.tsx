@@ -18,17 +18,24 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as Theme | null;
-    const preferredTheme: Theme = window.matchMedia("(prefers-color-scheme: light)").matches
+    const preferredTheme: Theme = window.matchMedia(
+      "(prefers-color-scheme: light)",
+    ).matches
       ? "light"
       : "dark";
-    const initialTheme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : preferredTheme;
+    const initialTheme =
+      savedTheme === "light" || savedTheme === "dark"
+        ? savedTheme
+        : preferredTheme;
 
     applyTheme(initialTheme);
     setTheme(initialTheme);
   }, []);
 
   const toggleTheme = () => {
-    const currentTheme = document.documentElement.dataset.theme as Theme | undefined;
+    const currentTheme = document.documentElement.dataset.theme as
+      | Theme
+      | undefined;
     const nextTheme: Theme = currentTheme === "light" ? "dark" : "light";
     applyTheme(nextTheme);
     try {
