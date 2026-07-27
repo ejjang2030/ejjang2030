@@ -283,7 +283,7 @@ export default function Home() {
         id="top"
         className={classNames(
           wrap,
-          "grid min-h-[520px] grid-cols-2 border-x border-line max-md:grid-cols-1",
+          "grid min-h-[max(520px,calc(100svh-210px))] scroll-mt-[74px] grid-cols-2 border-x border-line max-md:grid-cols-1",
         )}
       >
         <div
@@ -350,16 +350,16 @@ export default function Home() {
         id="about"
         className={classNames(
           wrap,
-          "grid grid-cols-2 border-x border-line max-md:grid-cols-1",
+          "section-reveal grid min-h-[500px] scroll-mt-[74px] grid-cols-2 border-x border-line max-md:grid-cols-1",
         )}
       >
-        <div className="min-h-[560px] border-r border-line max-md:border-r-0">
-          <div className="relative h-full min-h-[560px] overflow-hidden bg-surface p-10 max-md:min-h-[420px] max-md:p-5">
+        <div className="min-h-[500px] border-r border-line max-md:min-h-[360px] max-md:border-r-0">
+          <div className="relative h-full min-h-[500px] overflow-hidden bg-surface p-8 max-md:min-h-[360px] max-md:p-5">
             <div className="absolute -left-20 bottom-0 size-[430px] rounded-full border border-line" />
             <div className="absolute -left-4 bottom-16 size-[300px] rounded-full border border-line" />
             <div className="relative z-10 grid h-full place-items-center">
-              <div className="w-[76%] rotate-[-4deg] rounded-xl border border-line bg-background p-6 shadow-2xl">
-                <p className="font-mono text-[9px] tracking-[.2em] text-accent">
+              <div className="work-method-card w-[76%] rounded-xl border border-line bg-background p-6 shadow-2xl">
+                <p className="font-bold text-[14px] tracking-[.2em] text-accent">
                   작업 방식
                 </p>
                 <div className="mt-8 space-y-5">
@@ -383,7 +383,7 @@ export default function Home() {
         <div
           className={classNames(
             pagePadding,
-            "flex flex-col justify-center py-24",
+            "flex flex-col justify-center py-16 max-md:py-14",
           )}
         >
           <p className="text-[16px] font-bold tracking-[.2em] text-accent">
@@ -408,7 +408,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="work" className="border-y border-line py-24 max-md:py-16">
+      <section
+        id="work"
+        className="section-reveal flex min-h-[calc(100svh-74px)] scroll-mt-[74px] items-center border-y border-line py-16 max-md:py-12"
+      >
         <div className={classNames(wrap, pagePadding)}>
           <div className="flex items-end justify-between gap-8 max-md:block">
             <div>
@@ -475,7 +478,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-b border-line py-24 max-md:py-16">
+      <section className="section-reveal flex min-h-[calc(100svh-74px)] scroll-mt-[74px] items-center border-b border-line py-16 max-md:py-12">
         <div className={classNames(wrap, pagePadding)}>
           <p className="text-[16px] font-bold tracking-[.2em] text-accent">
             경험 / 03
@@ -555,7 +558,7 @@ export default function Home() {
 
       <section
         id="learning"
-        className="border-b border-line py-24 max-md:py-16"
+        className="section-reveal flex min-h-[calc(100svh-74px)] scroll-mt-[74px] items-center border-b border-line py-16 max-md:py-12"
       >
         <div className={classNames(wrap, pagePadding)}>
           <div className="flex flex-col gap-12">
@@ -577,7 +580,7 @@ export default function Home() {
       <section
         className={classNames(
           wrap,
-          "grid grid-cols-2 border-x border-line max-md:grid-cols-1",
+          "section-reveal grid min-h-[calc(100svh-74px)] scroll-mt-[74px] grid-cols-2 border-x border-line max-md:grid-cols-1",
         )}
       >
         <div
@@ -622,8 +625,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-line">
-        <div className={classNames(wrap, pagePadding, "py-28 text-center")}>
+      <section className="section-reveal flex min-h-[calc(100svh-74px)] scroll-mt-[74px] items-center border-t border-line">
+        <div className={classNames(wrap, pagePadding, "py-20 text-center")}>
           <p className="text-[16px] font-bold tracking-[.2em] text-accent">
             함께할 프로젝트가 있나요?
           </p>
