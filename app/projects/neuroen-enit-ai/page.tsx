@@ -5,6 +5,7 @@ import { ProductFlow, ServiceScreens } from "./components/service-screens";
 import { ModelEvolution } from "./components/model-evolution";
 import { SystemEvolution } from "./components/system-evolution";
 import { DecisionJournal } from "./components/decision-journal";
+import { ProjectTableOfContents } from "./components/project-toc";
 import { SectionLabel, contentWrap } from "./components/shared";
 
 export const metadata: Metadata = {
@@ -82,7 +83,7 @@ function ProjectHero() {
 
 function ProjectOverview() {
   return (
-    <section className="border-t border-line py-24 max-md:py-16">
+    <section id="overview" className="scroll-mt-20 border-t border-line py-24 max-md:py-16">
       <div className={contentWrap}>
         <SectionLabel>프로젝트 개요 / 01</SectionLabel>
         <div className="mt-6 grid grid-cols-1 gap-10">
@@ -111,7 +112,7 @@ function ProjectOverview() {
 
 function Responsibilities() {
   return (
-    <section className="py-24 max-md:py-16">
+    <section id="responsibilities" className="scroll-mt-20 py-24 max-md:py-16">
       <div className={contentWrap}>
         <SectionLabel>담당 업무 / 03</SectionLabel>
         <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line max-md:grid-cols-1">
@@ -141,13 +142,14 @@ export default function NeuroenProjectPage() {
         </div>
       </header>
       <ProjectHero />
-      <section className="py-24 max-md:py-16">
+      <ProjectTableOfContents />
+      <section id="background" className="scroll-mt-20 py-24 max-md:py-16">
         <div className={contentWrap}>
           <ProjectBackground />
         </div>
       </section>
       <ProjectOverview />
-      <section className="border-y border-line py-24 max-md:py-16">
+      <section id="service-flow" className="scroll-mt-20 border-y border-line py-24 max-md:py-16">
         <div className={contentWrap}>
           <SectionLabel>서비스 흐름 / 02</SectionLabel>
           <h2 className="mt-5 mb-10 text-[clamp(32px,5vw,58px)] font-black tracking-[-.045em]">
@@ -158,17 +160,17 @@ export default function NeuroenProjectPage() {
         </div>
       </section>
       <Responsibilities />
-      <section className="border-y border-line py-24 max-md:py-16">
+      <section id="model-evolution" className="scroll-mt-20 border-y border-line py-24 max-md:py-16">
         <div className={contentWrap}>
           <ModelEvolution />
         </div>
       </section>
-      <section className="border-b border-line py-24 max-md:py-16">
+      <section id="system-evolution" className="scroll-mt-20 border-b border-line py-24 max-md:py-16">
         <div className={contentWrap}>
           <SystemEvolution />
         </div>
       </section>
-      <section className="py-24 max-md:py-16">
+      <section id="decisions" className="scroll-mt-20 py-24 max-md:py-16">
         <div className={contentWrap}>
           <DecisionJournal />
         </div>
