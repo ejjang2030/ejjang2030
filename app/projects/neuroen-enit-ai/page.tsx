@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import ThemeToggle from "../../components/theme-toggle";
 import { ProjectBackground } from "./components/project-background";
 import { ProductFlow, ServiceScreens } from "./components/service-screens";
 import { ModelEvolution } from "./components/model-evolution";
@@ -99,8 +98,9 @@ function ProjectOverview() {
               리포트까지 확인할 수 있는 흐름을 구축했습니다.
             </p>
             <p>
-              초기 5명 규모의 팀에서 모델 실험, 웹 서비스, 데이터 보안과 서버
-              구성을 동시에 진행했습니다.
+              초기 4명(이지브레인 원장님, 뉴로엔대표님, 이사님, 저) 규모의
+              팀에서 모델 실험, 웹 서비스, 데이터 보안과 서버 구성을 동시에
+              진행했습니다.
             </p>
           </div>
         </div>
@@ -138,7 +138,6 @@ export default function NeuroenProjectPage() {
           <Link href="/" className="text-sm font-bold">
             ← 포트폴리오로 돌아가기
           </Link>
-          <ThemeToggle />
         </div>
       </header>
       <ProjectHero />

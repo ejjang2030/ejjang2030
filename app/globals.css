@@ -1,24 +1,6 @@
 @import "tailwindcss";
 
-:root,
-:root[data-theme="dark"],
-:root.dark {
-  --background: #0b1120;
-  --surface: #111b2e;
-  --foreground: #f1f5f9;
-  --muted: #94a3b8;
-  --line: #263449;
-  --accent: #60a5fa;
-  --body-copy: #c2ccda;
-  --soft-copy: #b8c3d2;
-  --tag-copy: #b9c6d8;
-  --orbit: #31445f;
-  --orbit-core: #496482;
-  --button-text: #07111f;
-}
-
-:root[data-theme="light"],
-:root.light {
+:root {
   --background: #f8fafc;
   --surface: #eef4fa;
   --foreground: #0f172a;
@@ -54,7 +36,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground font-sans transition-colors duration-300;
+    @apply bg-background text-foreground font-sans;
   }
   button,
   a {
@@ -114,6 +96,19 @@
   background: color-mix(in srgb, var(--accent) 32%, transparent);
   clip-path: polygon(1% 5%, 100% 0, 98.5% 94%, 0 100%);
   transform: rotate(-0.7deg);
+}
+
+.credential-modal {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.credential-modal:target {
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
