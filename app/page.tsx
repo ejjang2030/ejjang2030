@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import Image from "next/image";
 import Link from "next/link";
 import ThemeToggle from "./components/theme-toggle";
 
@@ -11,6 +12,12 @@ const projects = [
       "qEEG 데이터를 분류하고 AI 분석 리포트를 생성하는 의료진용 웹 서비스와 분산 시스템 기반을 구축했습니다.",
     tags: ["PyTorch", "FastAPI", "React", "Docker"],
     href: "/projects/neuroen-enit-ai",
+    image: {
+      src: "/projects/neuroen/patient-input.jpg",
+      width: 4014,
+      height: 2473,
+      alt: "뉴로엔 ENIT-AI 환자 정보와 qEEG 이미지 입력 화면",
+    },
   },
   {
     index: "02",
@@ -199,9 +206,10 @@ export default function Home() {
         className="overflow-hidden border-y border-line py-2"
         aria-hidden="true"
       >
-        <p className="whitespace-nowrap text-center text-[clamp(52px,8vw,122px)] font-black leading-none tracking-[-.06em] text-transparent [-webkit-text-stroke:1px_var(--line)]">
-          AI 제품 개발 · 풀스택 · 시스템 설계 · 사용자 경험
-        </p>
+        <div className="marquee-track flex w-max whitespace-nowrap text-[clamp(52px,8vw,122px)] font-black leading-none tracking-[-.06em] text-transparent [-webkit-text-stroke:1px_var(--line)]">
+          <span className="pr-12">AI 제품 개발 · 풀스택 · 시스템 설계 · 사용자 경험 ·</span>
+          <span className="pr-12">AI 제품 개발 · 풀스택 · 시스템 설계 · 사용자 경험 ·</span>
+        </div>
       </div>
 
       <section
@@ -274,49 +282,37 @@ export default function Home() {
                 선택한 작업 / 02
               </p>
               <h2 className="mt-5 text-[clamp(42px,6vw,82px)] font-black tracking-[-.055em]">
-                프로젝트 목록
+                진행한 프로젝트
               </h2>
             </div>
             <p className="max-w-sm text-sm leading-7 text-muted max-md:mt-5">
               모델부터 서비스 화면까지 직접 연결하며 완성한 대표 프로젝트입니다.
             </p>
           </div>
-          <div className="mt-16 border-t border-line">
+          <div className="mt-16 grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-md:grid-cols-1">
             {projects.map((project) => (
               <Link
                 href={project.href}
                 key={project.index}
-                className="group grid grid-cols-[80px_1fr_1fr_50px] gap-8 border-b border-line py-10 transition-all hover:bg-surface max-md:grid-cols-[40px_1fr_30px] max-md:gap-3"
+                className="group flex min-h-[620px] flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl"
               >
-                <span className="font-mono text-xs text-accent">
-                  {project.index}
-                </span>
-                <div>
-                  <p className="text-[9px] font-bold tracking-[.16em] text-muted">
-                    {project.category}
-                  </p>
-                  <h3 className="mt-3 text-[clamp(24px,3vw,42px)] font-black tracking-[-.04em]">
-                    {project.title}
-                  </h3>
+                <div className="h-[220px] overflow-hidden border-b border-line bg-[#081322]">
+                  {"image" in project && project.image && (
+                    <Image src={project.image.src} width={project.image.width} height={project.image.height} alt={project.image.alt} className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]" sizes="(max-width:768px) 100vw, 380px" />
+                  )}
+                  {!("image" in project) && <div className="relative grid h-full place-items-center overflow-hidden bg-[radial-gradient(circle_at_70%_30%,rgba(59,130,246,.3),transparent_35%)]"><div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(96,165,250,.3)_1px,transparent_1px),linear-gradient(90deg,rgba(96,165,250,.3)_1px,transparent_1px)] [background-size:32px_32px]" /><div className="relative rounded-lg border border-blue-300/20 bg-slate-950/70 px-8 py-6 font-mono text-xs text-blue-200">{project.index} / SYSTEM READY</div></div>}
                 </div>
-                <div className="max-md:col-span-2 max-md:col-start-2">
-                  <p className="max-w-lg text-sm leading-7 text-muted">
-                    {project.description}
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-2">
+                <div className="flex flex-1 flex-col p-7">
+                  <div className="flex items-center justify-between"><span className="font-mono text-sm font-bold text-accent">{project.index}</span><p className="text-[10px] font-bold tracking-[.14em] text-muted">{project.category}</p></div>
+                  <h3 className="mt-6 text-[clamp(25px,2.5vw,36px)] font-black leading-tight tracking-[-.04em]">{project.title}</h3>
+                  <p className="mt-5 text-sm leading-7 text-muted">{project.description}</p>
+                  <div className="mt-6 flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-line px-3 py-1 text-[9px] text-muted"
-                      >
-                        {tag}
-                      </span>
+                      <span key={tag} className="rounded-full border border-line px-3 py-1.5 text-[10px] text-muted">{tag}</span>
                     ))}
                   </div>
+                  <div className="mt-auto flex items-center justify-between border-t border-line pt-6 text-sm font-bold"><span>프로젝트 상세 보기</span><span className="text-xl text-accent transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"><Arrow /></span></div>
                 </div>
-                <span className="text-xl transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 max-md:col-start-3 max-md:row-start-1">
-                  <Arrow />
-                </span>
               </Link>
             ))}
           </div>

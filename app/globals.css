@@ -68,11 +68,24 @@
   }
 }
 
+@keyframes marquee-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee-slide 22s linear infinite;
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .orbit-animation {
+    animation: none !important;
+  }
+  .marquee-track {
     animation: none !important;
   }
 }
