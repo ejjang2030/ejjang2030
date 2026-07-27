@@ -237,7 +237,7 @@ function SystemVisual() {
 export default function Home() {
   return (
     <main>
-      <header className="border-b border-line bg-background">
+      <header className="sticky top-0 z-50 border-b border-line bg-background/80 backdrop-blur-md">
         <div
           className={classNames(
             wrap,

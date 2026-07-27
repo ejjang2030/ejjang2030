@@ -132,7 +132,7 @@ function Responsibilities() {
 export default function NeuroenProjectPage() {
   return (
     <main className="project-detail">
-      <header className="border-b border-line">
+      <header className="sticky top-0 z-40 border-b border-line bg-background/95 backdrop-blur-md">
         <div
           className={`${contentWrap} flex h-[74px] items-center justify-between`}
         >
